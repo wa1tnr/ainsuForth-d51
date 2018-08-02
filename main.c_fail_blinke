@@ -1,0 +1,62 @@
+#include "atmel_start.h"
+#define RESET_COUNT 21000000
+
+int toggle = -1; // false
+
+void blink(void) {
+    if (toggle) {
+        PORT->Group[0].OUTSET.reg |= (uint32_t)(1 << 23); // 1 for high  0 for low
+        // PORT->Group[1].OUTTGL.reg = (uint32_t)(1 << 23);
+        toggle = 0; // reset
+    } else {
+        PORT->Group[0].OUTSET.reg |= (uint32_t)(0 << 23); // 1 for high  0 for low
+        // PORT->Group[1].OUTTGL.reg = (uint32_t)(0 << 23);
+        toggle = -1; // reset
+    }
+}
+
+
+#define PCOUNT 2
+
+volatile int p = PCOUNT;
+
+
+void makep(void) {
+    p = p * 2;
+    if (p > 210011122) {
+        p = 2;
+    }
+}
+
+void slower(void) {
+    for (volatile int q = p; q>0;q--) {
+        // nada
+    }
+}
+
+int main(void) {
+    SystemInit();
+
+    PORT->Group[0].DIRSET.reg |= (uint32_t)(1 << 23);
+    // PORT->Group[0].OUTSET.reg |= (uint32_t)(0 << 23); // 1 for high  0 for low
+
+    while(1) {
+        // delay_ms(200);
+        blink(); slower(); makep();
+        blink(); slower(); makep();
+    }
+
+    volatile int icount = RESET_COUNT;
+    while (1) {
+        for (int j=29;j>0;j--) {
+            if (icount == 1) {
+                icount = RESET_COUNT;
+                if (j==2){
+                    blink(); // toggle LED on or off
+                }
+            }
+            icount--;
+        }
+    }
+    while(1);
+}

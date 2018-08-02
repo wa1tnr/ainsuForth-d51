@@ -126,3 +126,7 @@ gcc/AtmelStart.hex
 gcc/AtmelStart.lss
 gcc/AtmelStart.map
 
+blink_lab.d
+blink_lab.o
+caution_lamp.d
+caution_lamp.o

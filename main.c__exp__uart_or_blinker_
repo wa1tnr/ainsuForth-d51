@@ -1,0 +1,175 @@
+#include "atmel_start.h"
+// spoil our setup: // #include "driver_init.h"
+// #include "driver_examples.h"
+// examples/driver_examples.h
+
+/*
+void USART_0a_example(void)
+{
+        struct io_descriptor *io;
+        usart_sync_get_io_descriptor(&USART_0a, &io);
+        usart_sync_enable(&USART_0a);
+
+        io_write(io, (uint8_t *)"Hello World!", 12);
+}
+*/
+
+// clock clock who's there ///////////////////
+
+#undef JAKES_CLOCK
+#ifndef JAKES_CLOCK
+void clock_init(void){ // Jake Read
+    NVMCTRL->CTRLA.reg |= NVMCTRL_CTRLA_RWS(0);
+    GCLK->CTRLA.bit.SWRST = 1;
+    while(GCLK->SYNCBUSY.reg & GCLK_SYNCBUSY_SWRST);
+    GCLK->GENCTRL[3].reg = GCLK_GENCTRL_SRC(GCLK_GENCTRL_SRC_OSCULP32K) | GCLK_GENCTRL_GENEN;
+    while(GCLK->SYNCBUSY.reg & GCLK_SYNCBUSY_GENCTRL3);
+    GCLK->GENCTRL[0].reg = GCLK_GENCTRL_SRC(GCLK_GENCTRL_SRC_OSCULP32K) | GCLK_GENCTRL_GENEN;
+    while(GCLK->SYNCBUSY.reg & GCLK_SYNCBUSY_GENCTRL0);
+
+    OSCCTRL->DFLLCTRLA.reg = 0;
+    OSCCTRL->DFLLMUL.reg = OSCCTRL_DFLLMUL_CSTEP(0x1) | OSCCTRL_DFLLMUL_FSTEP(0x1) | OSCCTRL_DFLLMUL_MUL(0);
+    while(OSCCTRL->DFLLSYNC.reg & OSCCTRL_DFLLSYNC_DFLLMUL);
+    OSCCTRL->DFLLCTRLB.reg = 0;
+    while(OSCCTRL->DFLLSYNC.reg & OSCCTRL_DFLLSYNC_DFLLCTRLB);
+    OSCCTRL->DFLLCTRLA.reg |= OSCCTRL_DFLLCTRLA_ENABLE;
+    while(OSCCTRL->DFLLSYNC.reg & OSCCTRL_DFLLSYNC_ENABLE);
+    OSCCTRL->DFLLCTRLB.reg = OSCCTRL_DFLLCTRLB_WAITLOCK | OSCCTRL_DFLLCTRLB_CCDIS | OSCCTRL_DFLLCTRLB_USBCRM;
+    while(!OSCCTRL->STATUS.bit.DFLLRDY);
+
+    GCLK->GENCTRL[5].reg = GCLK_GENCTRL_SRC(GCLK_GENCTRL_SRC_DFLL_Val) | GCLK_GENCTRL_GENEN | GCLK_GENCTRL_DIV(24u);
+    while(GCLK->SYNCBUSY.bit.GENCTRL5);
+
+    GCLK->PCHCTRL[OSCCTRL_GCLK_ID_FDPLL0].reg = (1 << GCLK_PCHCTRL_CHEN_Pos) | GCLK_PCHCTRL_GEN(GCLK_PCHCTRL_GEN_GCLK5_Val);
+    OSCCTRL->Dpll[0].DPLLRATIO.reg = OSCCTRL_DPLLRATIO_LDRFRAC(0x00) | OSCCTRL_DPLLRATIO_LDR(59);
+    while(OSCCTRL->Dpll[0].DPLLSYNCBUSY.bit.DPLLRATIO);
+    OSCCTRL->Dpll[0].DPLLCTRLB.reg = OSCCTRL_DPLLCTRLB_REFCLK_GCLK | OSCCTRL_DPLLCTRLB_LBYPASS;
+    OSCCTRL->Dpll[0].DPLLCTRLA.reg = OSCCTRL_DPLLCTRLA_ENABLE;
+    while(OSCCTRL->Dpll[0].DPLLSTATUS.bit.CLKRDY == 0 || OSCCTRL->Dpll[0].DPLLSTATUS.bit.LOCK == 0);
+
+    GCLK->GENCTRL[0].reg = GCLK_GENCTRL_SRC(GCLK_GENCTRL_SRC_DPLL0) | GCLK_GENCTRL_IDC | GCLK_GENCTRL_GENEN;
+    while(GCLK->SYNCBUSY.reg & GCLK_SYNCBUSY_GENCTRL0);
+
+    MCLK->CPUDIV.reg = MCLK_CPUDIV_DIV_DIV1;
+}
+
+void blink(void) {
+    // for (volatile int i = 2009999999 ; i > 0 ; i--) {
+    // for (volatile int i =    2009999999 ; i > 0 ; i--) {
+        // do nothing
+    // }
+    PORT->Group[1].OUTTGL.reg = (uint32_t)(1 << 23); // blink STLB // was 14
+}
+
+#endif // #ifdef JAKES_CLOCK
+
+#define RESET_COUNT 2100000000
+//                  2 000 000
+int main(void)
+{
+    /* Initialize the SAM system */
+    SystemInit();
+
+    // clock_init();
+
+    /*setup blinking
+    STLR        PB13
+    STLB        PB14
+    LED         PA23
+    */
+    PORT->Group[0].DIRSET.reg |= (uint32_t)(1 << 23);
+    PORT->Group[1].DIRSET.reg |= (uint32_t)(1 << 13);
+    PORT->Group[1].DIRSET.reg |= (uint32_t)(1 << 14);
+    PORT->Group[0].OUTSET.reg |= (uint32_t)(1 << 23);
+    PORT->Group[1].OUTSET.reg |= (uint32_t)(1 << 13);
+    PORT->Group[1].OUTSET.reg |= (uint32_t)(1 << 14);
+
+    volatile int icount = RESET_COUNT;
+    while (1) {
+        if (icount == 1) {
+            // blink(); // toggle LED on or off
+            icount = RESET_COUNT;
+        }
+        icount--;
+
+    // for (volatile int i =    2009999999 ; i > 0 ; i--) {
+/*
+        while(!SERCOM5->USART.INTFLAG.bit.DRE);
+        // SERCOM5->USART.DATA.reg = (uint8_t)170;
+        SERCOM5->USART.DATA.reg = (uint8_t)43;
+*/
+        // blink();
+    }
+
+
+    // SysTick_Config(5000000);
+    // SysTick_Config(5000000);
+
+    /* setup UARTs
+    NP1RX       PA12 / SER4-1
+    NP1TX       PA13 / SER4-0
+
+    NP2RX       PB03 / SER5-1 / Peripheral D     PB17 SERCOM5.1
+    NP2TX       PB02 / SER5-0 / Peripheral D     PB16 SERCOM5.0
+    */
+
+    blink(); // toggle LED on or off
+
+    // setup pins for peripheral
+    PORT->Group[1].DIRCLR.reg = (uint32_t)(1 << 17); // rx is input
+    PORT->Group[1].DIRSET.reg = (uint32_t)(1 << 16); // tx output
+    PORT->Group[1].PINCFG[17].bit.PMUXEN = 1;
+    PORT->Group[1].PMUX[17>>1].reg |= PORT_PMUX_PMUXE(0x3); 
+    PORT->Group[1].PMUX[17>>3].reg |= PORT_PMUX_PMUXO(0x3);
+    PORT->Group[1].PINCFG[16].bit.PMUXEN = 1; // was 2 changed to 16
+    PORT->Group[1].PMUX[16>>1].reg |= PORT_PMUX_PMUXE(0x3);
+    PORT->Group[1].PMUX[16>>3].reg |= PORT_PMUX_PMUXO(0x3);
+    // unmask clocks
+    MCLK->APBDMASK.reg |= MCLK_APBDMASK_SERCOM5;
+    // generate clocks to, starting with clock 6 (arbitrary choice, lower # held for system things)
+    // datasheet says normally one gclk per peripheral shrugman knows why
+    GCLK->GENCTRL[6].reg = GCLK_GENCTRL_SRC(GCLK_GENCTRL_SRC_DFLL) | GCLK_GENCTRL_GENEN;
+    while(GCLK->SYNCBUSY.reg & GCLK_SYNCBUSY_GENCTRL6);
+    GCLK->PCHCTRL[SERCOM5_GCLK_ID_CORE].reg = GCLK_PCHCTRL_CHEN | GCLK_PCHCTRL_GEN_GCLK6;
+    // now the sercom
+    while(SERCOM5->USART.SYNCBUSY.bit.ENABLE);
+    SERCOM5->USART.CTRLA.bit.ENABLE = 0;
+    while(SERCOM5->USART.SYNCBUSY.bit.SWRST);
+    SERCOM5->USART.CTRLA.bit.SWRST = 1;
+    while(SERCOM5->USART.SYNCBUSY.bit.SWRST);
+    while(SERCOM5->USART.SYNCBUSY.bit.SWRST || SERCOM5->USART.SYNCBUSY.bit.ENABLE);
+
+    // now reset and ready, do config
+    SERCOM5->USART.CTRLA.reg = SERCOM_USART_CTRLA_MODE(1) | SERCOM_USART_CTRLA_DORD | SERCOM_USART_CTRLA_RXPO(1) | SERCOM_USART_CTRLA_TXPO(0);
+    while(SERCOM5->USART.SYNCBUSY.bit.CTRLB);
+    SERCOM5->USART.CTRLB.reg = SERCOM_USART_CTRLB_RXEN | SERCOM_USART_CTRLB_TXEN | SERCOM_USART_CTRLB_CHSIZE(0);
+    /*
+    BAUD = 65536*(1-S*(fBAUD/fref))
+    where S is samples per bit, 16 for async uart
+    where fBAUD is the rate that you want
+    where fref is the peripheral clock from GCLK, in this case (and most) 48MHz
+
+    BAUD = 65536*(1-16*(115200/48meg))
+    */
+    // SERCOM5->USART.BAUD.reg = 45402; // 921600
+    SERCOM5->USART.BAUD.reg    = 63018; // 115200
+/*
+    45402 for 921600, 63018 for 11520
+*/
+    while(SERCOM5->USART.SYNCBUSY.bit.ENABLE);
+    SERCOM5->USART.CTRLA.bit.ENABLE = 1;
+
+    // USART_0a_example();
+
+    blink(); // toggle LED on or off
+
+    while(1);
+
+}
+
+/*
+void SysTick_Handler(void){
+    // PORT->Group[1].OUTTGL.reg = (uint32_t)(1 << 23); // blink STLB // was 14
+}
+*/
+
