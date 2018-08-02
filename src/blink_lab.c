@@ -49,58 +49,71 @@ void blink(void) {
     PORT->Group[0].OUTSET.reg |= (uint32_t)(1 << 23); // PA23 ON
 */
 
+void bl_togl_Del(void) {
+    blink_toggled();
+    for (int i = 3; i > 0; i--) {
+        ldelay();
+    }
+}
+
 void say_in_toggles(void) {
-    blink_toggled();
-    ldelay();
-    ldelay();
-    ldelay();
-    blink_toggled();
-    ldelay();
-    ldelay();
-    ldelay();
-    blink_toggled();
-    ldelay();
-    ldelay();
-    ldelay();
-    blink_toggled();
-    ldelay();
-    ldelay();
-    ldelay();
-    blink_toggled();
-    ldelay();
-    ldelay();
-    ldelay();
-    ldelay();
-    ldelay();
-    ldelay();
-    ldelay();
+    for (int i = 5; i > 0; i--) {
+        bl_togl_Del();
+    }
+    for (int i = 7; i > 0; i--) {
+        ldelay();
+    }
 }
 
 void say_in_blinks(void) {
-    blink();
-    blink();
-    blink();
-    blink();
-    blink();
-    blink();
-    blink();
+    for (int i = 3; i > 0; i--) {
+        blink();
+    }
+}
+
+void four_ldelay(void) {
+    for (int i = 4; i > 0; i--) {
+        ldelay();
+    }
 }
 
 void blink_lab(void) { // not integrated to a standalone file just yet.
     int icount = 5;
-    // SystemInit();
     LED_output();
     say_in_toggles();
+
+    four_ldelay();
     say_in_blinks();
-    caution_lamp();
-    while (1);
-    while (1) {
+
+    for (int i = 2; i > 0; i--) {
+        four_ldelay();
+    }
+
+    say_in_blinks();
+
+    for (int i = 4; i > 0; i--) {
+        four_ldelay();
+    }
+
+    for (int j = 3; j > 0; j--) {
         if (icount == 1) {
+            say_in_toggles(); four_ldelay(); four_ldelay(); say_in_blinks(); say_in_toggles(); four_ldelay(); four_ldelay(); say_in_blinks(); say_in_toggles(); four_ldelay(); four_ldelay(); say_in_blinks();
+            for (int i = 4; i>0; i--) { four_ldelay(); }
             icount = RESET_COUNT;
+            for (int i = 12; i>0; i--) { say_in_toggles(); four_ldelay(); four_ldelay(); }
         }
         icount--;
-    // blink(); // toggle LED on or off
-    // ldelay();
     }
-    while(1);
+    for (int i = 8; i>0; i--) { four_ldelay(); }
+    for (int i = 3; i>0; i--) {
+        say_in_toggles(); four_ldelay(); four_ldelay();
+        say_in_blinks(); four_ldelay(); four_ldelay();
+    }
+    for (int i = 8; i>0; i--) { four_ldelay(); }
+    for (int i = 8; i>0; i--) { four_ldelay(); }
+        say_in_blinks(); four_ldelay(); four_ldelay();
+        say_in_blinks(); four_ldelay(); four_ldelay();
+        say_in_blinks(); four_ldelay(); four_ldelay();
+    caution_lamp(); // a trap
+    while (1); //  last trap /////
 }

@@ -3,39 +3,39 @@ AtmelStart.elf:     file format elf32-littlearm
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .text         000006d0  00004000  00004000  00004000  2**2
+  0 .text         0000078c  00004000  00004000  00004000  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  1 .relocate     00000004  20000000  000046d0  00010000  2**2
+  1 .relocate     00000004  20000000  0000478c  00010000  2**2
                   CONTENTS, ALLOC, LOAD, DATA
   2 .bkupram      00000000  47000000  47000000  00010004  2**0
                   CONTENTS
   3 .qspi         00000000  04000000  04000000  00010004  2**0
                   CONTENTS
-  4 .bss          00000030  20000004  000046d4  00010004  2**2
+  4 .bss          00000030  20000004  00004790  00010004  2**2
                   ALLOC
-  5 .stack        0000c004  20000034  00004704  00010004  2**0
+  5 .stack        0000c004  20000034  000047c0  00010004  2**0
                   ALLOC
   6 .ARM.attributes 0000002e  00000000  00000000  00010004  2**0
                   CONTENTS, READONLY
   7 .comment      0000007f  00000000  00000000  00010032  2**0
                   CONTENTS, READONLY
-  8 .debug_info   000060be  00000000  00000000  000100b1  2**0
+  8 .debug_info   00006451  00000000  00000000  000100b1  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_abbrev 00000dfa  00000000  00000000  0001616f  2**0
+  9 .debug_abbrev 00000e1d  00000000  00000000  00016502  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_aranges 000001a0  00000000  00000000  00016f69  2**0
+ 10 .debug_aranges 000001b0  00000000  00000000  0001731f  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_ranges 00000228  00000000  00000000  00017109  2**0
+ 11 .debug_ranges 000002b0  00000000  00000000  000174cf  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_macro  00002d3b  00000000  00000000  00017331  2**0
+ 12 .debug_macro  00002d3b  00000000  00000000  0001777f  2**0
                   CONTENTS, READONLY, DEBUGGING
- 13 .debug_line   000040dd  00000000  00000000  0001a06c  2**0
+ 13 .debug_line   00004118  00000000  00000000  0001a4ba  2**0
                   CONTENTS, READONLY, DEBUGGING
- 14 .debug_str    000df11c  00000000  00000000  0001e149  2**0
+ 14 .debug_str    000df12d  00000000  00000000  0001e5d2  2**0
                   CONTENTS, READONLY, DEBUGGING
- 15 .debug_frame  0000035c  00000000  00000000  000fd268  2**2
+ 15 .debug_frame  00000394  00000000  00000000  000fd700  2**2
                   CONTENTS, READONLY, DEBUGGING
- 16 .debug_loc    000003db  00000000  00000000  000fd5c4  2**0
+ 16 .debug_loc    000007fb  00000000  00000000  000fda94  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -94,7 +94,7 @@ Disassembly of section .text:
     427a:	bd10      	pop	{r4, pc}
     427c:	20000004 	.word	0x20000004
     4280:	00000000 	.word	0x00000000
-    4284:	000046d0 	.word	0x000046d0
+    4284:	0000478c 	.word	0x0000478c
 
 00004288 <frame_dummy>:
     4288:	b508      	push	{r3, lr}
@@ -106,7 +106,7 @@ Disassembly of section .text:
     4296:	bd08      	pop	{r3, pc}
     4298:	00000000 	.word	0x00000000
     429c:	20000008 	.word	0x20000008
-    42a0:	000046d0 	.word	0x000046d0
+    42a0:	0000478c 	.word	0x0000478c
 
 000042a4 <SystemInit>:
  *         Initialize the System and update the SystemCoreClock variable.
@@ -247,14 +247,14 @@ __attribute__((always_inline)) __STATIC_INLINE void __DSB(void)
 		*pDest++ = 0;
     433e:	f843 1b04 	str.w	r1, [r3], #4
     4342:	e7e1      	b.n	4308 <Reset_Handler+0x18>
-    4344:	000046d0 	.word	0x000046d0
+    4344:	0000478c 	.word	0x0000478c
     4348:	20000000 	.word	0x20000000
     434c:	20000004 	.word	0x20000004
     4350:	20000004 	.word	0x20000004
     4354:	20000034 	.word	0x20000034
     4358:	00004000 	.word	0x00004000
     435c:	e000ed00 	.word	0xe000ed00
-    4360:	00004669 	.word	0x00004669
+    4360:	00004725 	.word	0x00004725
     4364:	00004369 	.word	0x00004369
 
 00004368 <main>:
@@ -277,7 +277,7 @@ int main(void) {
     4376:	e7fe      	b.n	4376 <main+0xe>
     4378:	000042a5 	.word	0x000042a5
     437c:	00004545 	.word	0x00004545
-    4380:	00004645 	.word	0x00004645
+    4380:	00004655 	.word	0x00004655
 
 00004384 <init_act_LED>:
 	((Port *)hw)->Group[submodule_index].DIRTGL.reg = PORT_DIR_DIR(mask);
@@ -748,171 +748,293 @@ void blink(void) {
     45dc:	00004575 	.word	0x00004575
     45e0:	00004565 	.word	0x00004565
 
-000045e4 <say_in_toggles>:
+000045e4 <bl_togl_Del>:
     PORT->Group[0].OUTSET.reg |= (uint32_t)(1 << 23); // PA23 ON
     PORT->Group[0].OUTSET.reg |= (uint32_t)(0 << 23); // PA23 OFF
     PORT->Group[0].OUTSET.reg |= (uint32_t)(1 << 23); // PA23 ON
 */
 
-void say_in_toggles(void) {
-    45e4:	b570      	push	{r4, r5, r6, lr}
+void bl_togl_Del(void) {
+    45e4:	b510      	push	{r4, lr}
     blink_toggled();
-    ldelay();
-    45e6:	4c0e      	ldr	r4, [pc, #56]	; (4620 <say_in_toggles+0x3c>)
-    blink_toggled();
-    45e8:	4d0e      	ldr	r5, [pc, #56]	; (4624 <say_in_toggles+0x40>)
-    45ea:	47a8      	blx	r5
-    ldelay();
-    45ec:	47a0      	blx	r4
-    ldelay();
-    45ee:	47a0      	blx	r4
-    ldelay();
-    45f0:	47a0      	blx	r4
-    blink_toggled();
-    45f2:	47a8      	blx	r5
-    ldelay();
-    45f4:	47a0      	blx	r4
-    ldelay();
-    45f6:	47a0      	blx	r4
-    ldelay();
-    45f8:	47a0      	blx	r4
-    blink_toggled();
-    45fa:	47a8      	blx	r5
-    ldelay();
-    45fc:	47a0      	blx	r4
-    ldelay();
-    45fe:	47a0      	blx	r4
-    ldelay();
-    4600:	47a0      	blx	r4
-    blink_toggled();
-    4602:	47a8      	blx	r5
-    ldelay();
-    4604:	47a0      	blx	r4
-    ldelay();
-    4606:	47a0      	blx	r4
-    ldelay();
-    4608:	47a0      	blx	r4
-    blink_toggled();
-    460a:	47a8      	blx	r5
-    ldelay();
-    460c:	47a0      	blx	r4
-    ldelay();
-    460e:	47a0      	blx	r4
-    ldelay();
-    4610:	47a0      	blx	r4
-    ldelay();
-    4612:	47a0      	blx	r4
-    ldelay();
-    4614:	47a0      	blx	r4
-    ldelay();
-    4616:	47a0      	blx	r4
-    ldelay();
-    4618:	4623      	mov	r3, r4
+    45e6:	4b04      	ldr	r3, [pc, #16]	; (45f8 <bl_togl_Del+0x14>)
+    45e8:	4798      	blx	r3
+    for (int i = 3; i > 0; i--) {
+        ldelay();
+    45ea:	4904      	ldr	r1, [pc, #16]	; (45fc <bl_togl_Del+0x18>)
+    45ec:	4788      	blx	r1
+    45ee:	4788      	blx	r1
+    }
 }
-    461a:	e8bd 4070 	ldmia.w	sp!, {r4, r5, r6, lr}
-    ldelay();
-    461e:	4718      	bx	r3
-    4620:	00004575 	.word	0x00004575
-    4624:	000045a5 	.word	0x000045a5
+    45f0:	e8bd 4010 	ldmia.w	sp!, {r4, lr}
+        ldelay();
+    45f4:	4708      	bx	r1
+    45f6:	bf00      	nop
+    45f8:	000045a5 	.word	0x000045a5
+    45fc:	00004575 	.word	0x00004575
 
-00004628 <say_in_blinks>:
+00004600 <say_in_toggles>:
+
+void say_in_toggles(void) {
+    4600:	b510      	push	{r4, lr}
+    for (int i = 5; i > 0; i--) {
+        bl_togl_Del();
+    4602:	4c08      	ldr	r4, [pc, #32]	; (4624 <say_in_toggles+0x24>)
+    4604:	47a0      	blx	r4
+    4606:	47a0      	blx	r4
+    4608:	47a0      	blx	r4
+    460a:	47a0      	blx	r4
+    460c:	47a0      	blx	r4
+    }
+    for (int i = 7; i > 0; i--) {
+        ldelay();
+    460e:	4906      	ldr	r1, [pc, #24]	; (4628 <say_in_toggles+0x28>)
+    4610:	4788      	blx	r1
+    4612:	4788      	blx	r1
+    4614:	4788      	blx	r1
+    4616:	4788      	blx	r1
+    4618:	4788      	blx	r1
+    461a:	4788      	blx	r1
+    }
+}
+    461c:	e8bd 4010 	ldmia.w	sp!, {r4, lr}
+        ldelay();
+    4620:	4708      	bx	r1
+    4622:	bf00      	nop
+    4624:	000045e5 	.word	0x000045e5
+    4628:	00004575 	.word	0x00004575
+
+0000462c <say_in_blinks>:
 
 void say_in_blinks(void) {
-    4628:	b510      	push	{r4, lr}
-    blink();
-    462a:	4805      	ldr	r0, [pc, #20]	; (4640 <say_in_blinks+0x18>)
-    462c:	4780      	blx	r0
-    blink();
-    462e:	4780      	blx	r0
-    blink();
+    462c:	b510      	push	{r4, lr}
+    for (int i = 3; i > 0; i--) {
+        blink();
+    462e:	4803      	ldr	r0, [pc, #12]	; (463c <say_in_blinks+0x10>)
     4630:	4780      	blx	r0
-    blink();
     4632:	4780      	blx	r0
-    blink();
-    4634:	4780      	blx	r0
-    blink();
-    4636:	4780      	blx	r0
-    blink();
+    }
 }
-    4638:	e8bd 4010 	ldmia.w	sp!, {r4, lr}
-    blink();
-    463c:	4700      	bx	r0
-    463e:	bf00      	nop
-    4640:	000045c5 	.word	0x000045c5
+    4634:	e8bd 4010 	ldmia.w	sp!, {r4, lr}
+        blink();
+    4638:	4700      	bx	r0
+    463a:	bf00      	nop
+    463c:	000045c5 	.word	0x000045c5
 
-00004644 <blink_lab>:
+00004640 <four_ldelay>:
+
+void four_ldelay(void) {
+    4640:	b510      	push	{r4, lr}
+    for (int i = 4; i > 0; i--) {
+        ldelay();
+    4642:	4903      	ldr	r1, [pc, #12]	; (4650 <four_ldelay+0x10>)
+    4644:	4788      	blx	r1
+    4646:	4788      	blx	r1
+    4648:	4788      	blx	r1
+    }
+}
+    464a:	e8bd 4010 	ldmia.w	sp!, {r4, lr}
+        ldelay();
+    464e:	4708      	bx	r1
+    4650:	00004575 	.word	0x00004575
+
+00004654 <blink_lab>:
 
 void blink_lab(void) { // not integrated to a standalone file just yet.
-    4644:	b508      	push	{r3, lr}
+    4654:	e92d 41f0 	stmdb	sp!, {r4, r5, r6, r7, r8, lr}
     int icount = 5;
-    // SystemInit();
     LED_output();
-    4646:	4b04      	ldr	r3, [pc, #16]	; (4658 <blink_lab+0x14>)
-    4648:	4798      	blx	r3
+    4658:	4b2d      	ldr	r3, [pc, #180]	; (4710 <blink_lab+0xbc>)
     say_in_toggles();
-    464a:	4b04      	ldr	r3, [pc, #16]	; (465c <blink_lab+0x18>)
-    464c:	4798      	blx	r3
+
+    four_ldelay();
+    465a:	4c2e      	ldr	r4, [pc, #184]	; (4714 <blink_lab+0xc0>)
     say_in_blinks();
-    464e:	4b04      	ldr	r3, [pc, #16]	; (4660 <blink_lab+0x1c>)
-    4650:	4798      	blx	r3
-    caution_lamp();
-    4652:	4b04      	ldr	r3, [pc, #16]	; (4664 <blink_lab+0x20>)
-    4654:	4798      	blx	r3
-    4656:	e7fe      	b.n	4656 <blink_lab+0x12>
-    4658:	00004545 	.word	0x00004545
-    465c:	000045e5 	.word	0x000045e5
-    4660:	00004629 	.word	0x00004629
-    4664:	00004521 	.word	0x00004521
+    465c:	4d2e      	ldr	r5, [pc, #184]	; (4718 <blink_lab+0xc4>)
+    say_in_toggles();
+    465e:	4e2f      	ldr	r6, [pc, #188]	; (471c <blink_lab+0xc8>)
+    LED_output();
+    4660:	4798      	blx	r3
+    say_in_toggles();
+    4662:	47b0      	blx	r6
+    four_ldelay();
+    4664:	47a0      	blx	r4
+    say_in_blinks();
+    4666:	47a8      	blx	r5
 
-00004668 <__libc_init_array>:
-    4668:	b570      	push	{r4, r5, r6, lr}
-    466a:	4e0d      	ldr	r6, [pc, #52]	; (46a0 <__libc_init_array+0x38>)
-    466c:	4c0d      	ldr	r4, [pc, #52]	; (46a4 <__libc_init_array+0x3c>)
-    466e:	1ba4      	subs	r4, r4, r6
-    4670:	10a4      	asrs	r4, r4, #2
-    4672:	2500      	movs	r5, #0
-    4674:	42a5      	cmp	r5, r4
-    4676:	d109      	bne.n	468c <__libc_init_array+0x24>
-    4678:	4e0b      	ldr	r6, [pc, #44]	; (46a8 <__libc_init_array+0x40>)
-    467a:	4c0c      	ldr	r4, [pc, #48]	; (46ac <__libc_init_array+0x44>)
-    467c:	f000 f818 	bl	46b0 <_init>
-    4680:	1ba4      	subs	r4, r4, r6
-    4682:	10a4      	asrs	r4, r4, #2
-    4684:	2500      	movs	r5, #0
-    4686:	42a5      	cmp	r5, r4
-    4688:	d105      	bne.n	4696 <__libc_init_array+0x2e>
-    468a:	bd70      	pop	{r4, r5, r6, pc}
-    468c:	f856 3025 	ldr.w	r3, [r6, r5, lsl #2]
-    4690:	4798      	blx	r3
-    4692:	3501      	adds	r5, #1
-    4694:	e7ee      	b.n	4674 <__libc_init_array+0xc>
-    4696:	f856 3025 	ldr.w	r3, [r6, r5, lsl #2]
-    469a:	4798      	blx	r3
-    469c:	3501      	adds	r5, #1
-    469e:	e7f2      	b.n	4686 <__libc_init_array+0x1e>
-    46a0:	000046bc 	.word	0x000046bc
-    46a4:	000046bc 	.word	0x000046bc
-    46a8:	000046bc 	.word	0x000046bc
-    46ac:	000046c0 	.word	0x000046c0
+    for (int i = 2; i > 0; i--) {
+        four_ldelay();
+    4668:	47a0      	blx	r4
+    466a:	47a0      	blx	r4
+    }
 
-000046b0 <_init>:
-    46b0:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
-    46b2:	bf00      	nop
-    46b4:	bcf8      	pop	{r3, r4, r5, r6, r7}
-    46b6:	bc08      	pop	{r3}
-    46b8:	469e      	mov	lr, r3
-    46ba:	4770      	bx	lr
+    say_in_blinks();
+    466c:	47a8      	blx	r5
 
-000046bc <__init_array_start>:
-    46bc:	00004289 	.word	0x00004289
+    for (int i = 4; i > 0; i--) {
+        four_ldelay();
+    466e:	47a0      	blx	r4
+    4670:	47a0      	blx	r4
+    4672:	47a0      	blx	r4
+    4674:	47a0      	blx	r4
+    4676:	2703      	movs	r7, #3
 
-000046c0 <_fini>:
-    46c0:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
-    46c2:	bf00      	nop
-    46c4:	bcf8      	pop	{r3, r4, r5, r6, r7}
-    46c6:	bc08      	pop	{r3}
-    46c8:	469e      	mov	lr, r3
-    46ca:	4770      	bx	lr
+    for (int j = 3; j > 0; j--) {
+        if (icount == 1) {
+            say_in_toggles(); four_ldelay(); four_ldelay(); say_in_blinks(); say_in_toggles(); four_ldelay(); four_ldelay(); say_in_blinks(); say_in_toggles(); four_ldelay(); four_ldelay(); say_in_blinks();
+            for (int i = 4; i>0; i--) { four_ldelay(); }
+            icount = RESET_COUNT;
+    4678:	2305      	movs	r3, #5
+    for (int j = 3; j > 0; j--) {
+    467a:	3f01      	subs	r7, #1
+    467c:	d12c      	bne.n	46d8 <blink_lab+0x84>
+            for (int i = 12; i>0; i--) { say_in_toggles(); four_ldelay(); four_ldelay(); }
+        }
+        icount--;
+    }
+    for (int i = 8; i>0; i--) { four_ldelay(); }
+    467e:	47a0      	blx	r4
+    4680:	47a0      	blx	r4
+    4682:	47a0      	blx	r4
+    4684:	47a0      	blx	r4
+    4686:	47a0      	blx	r4
+    4688:	47a0      	blx	r4
+    468a:	47a0      	blx	r4
+    468c:	47a0      	blx	r4
+    468e:	2703      	movs	r7, #3
+    for (int i = 3; i>0; i--) {
+        say_in_toggles(); four_ldelay(); four_ldelay();
+    4690:	47b0      	blx	r6
+    4692:	47a0      	blx	r4
+    4694:	47a0      	blx	r4
+        say_in_blinks(); four_ldelay(); four_ldelay();
+    4696:	47a8      	blx	r5
+    4698:	47a0      	blx	r4
+    469a:	47a0      	blx	r4
+    for (int i = 3; i>0; i--) {
+    469c:	3f01      	subs	r7, #1
+    469e:	d1f7      	bne.n	4690 <blink_lab+0x3c>
+    }
+    for (int i = 8; i>0; i--) { four_ldelay(); }
+    46a0:	47a0      	blx	r4
+    46a2:	47a0      	blx	r4
+    46a4:	47a0      	blx	r4
+    46a6:	47a0      	blx	r4
+    46a8:	47a0      	blx	r4
+    46aa:	47a0      	blx	r4
+    46ac:	47a0      	blx	r4
+    46ae:	47a0      	blx	r4
+    for (int i = 8; i>0; i--) { four_ldelay(); }
+    46b0:	47a0      	blx	r4
+    46b2:	47a0      	blx	r4
+    46b4:	47a0      	blx	r4
+    46b6:	47a0      	blx	r4
+    46b8:	47a0      	blx	r4
+    46ba:	47a0      	blx	r4
+    46bc:	47a0      	blx	r4
+    46be:	47a0      	blx	r4
+        say_in_blinks(); four_ldelay(); four_ldelay();
+    46c0:	47a8      	blx	r5
+    46c2:	47a0      	blx	r4
+    46c4:	47a0      	blx	r4
+        say_in_blinks(); four_ldelay(); four_ldelay();
+    46c6:	47a8      	blx	r5
+    46c8:	47a0      	blx	r4
+    46ca:	47a0      	blx	r4
+        say_in_blinks(); four_ldelay(); four_ldelay();
+    46cc:	47a8      	blx	r5
+    46ce:	47a0      	blx	r4
+    46d0:	47a0      	blx	r4
+    caution_lamp(); // a trap
+    46d2:	4b13      	ldr	r3, [pc, #76]	; (4720 <blink_lab+0xcc>)
+    46d4:	4798      	blx	r3
+    46d6:	e7fe      	b.n	46d6 <blink_lab+0x82>
+        icount--;
+    46d8:	3b01      	subs	r3, #1
+        if (icount == 1) {
+    46da:	2b01      	cmp	r3, #1
+    46dc:	d1cd      	bne.n	467a <blink_lab+0x26>
+            say_in_toggles(); four_ldelay(); four_ldelay(); say_in_blinks(); say_in_toggles(); four_ldelay(); four_ldelay(); say_in_blinks(); say_in_toggles(); four_ldelay(); four_ldelay(); say_in_blinks();
+    46de:	47b0      	blx	r6
+    46e0:	47a0      	blx	r4
+    46e2:	47a0      	blx	r4
+    46e4:	47a8      	blx	r5
+    46e6:	47b0      	blx	r6
+    46e8:	47a0      	blx	r4
+    46ea:	47a0      	blx	r4
+    46ec:	47a8      	blx	r5
+    46ee:	47b0      	blx	r6
+    46f0:	47a0      	blx	r4
+    46f2:	47a0      	blx	r4
+    46f4:	47a8      	blx	r5
+            for (int i = 4; i>0; i--) { four_ldelay(); }
+    46f6:	47a0      	blx	r4
+    46f8:	47a0      	blx	r4
+    46fa:	47a0      	blx	r4
+    46fc:	47a0      	blx	r4
+    46fe:	f04f 080c 	mov.w	r8, #12
+            for (int i = 12; i>0; i--) { say_in_toggles(); four_ldelay(); four_ldelay(); }
+    4702:	47b0      	blx	r6
+    4704:	47a0      	blx	r4
+    4706:	47a0      	blx	r4
+    4708:	f1b8 0801 	subs.w	r8, r8, #1
+    470c:	d1f9      	bne.n	4702 <blink_lab+0xae>
+    470e:	e7b3      	b.n	4678 <blink_lab+0x24>
+    4710:	00004545 	.word	0x00004545
+    4714:	00004641 	.word	0x00004641
+    4718:	0000462d 	.word	0x0000462d
+    471c:	00004601 	.word	0x00004601
+    4720:	00004521 	.word	0x00004521
 
-000046cc <__fini_array_start>:
-    46cc:	00004265 	.word	0x00004265
+00004724 <__libc_init_array>:
+    4724:	b570      	push	{r4, r5, r6, lr}
+    4726:	4e0d      	ldr	r6, [pc, #52]	; (475c <__libc_init_array+0x38>)
+    4728:	4c0d      	ldr	r4, [pc, #52]	; (4760 <__libc_init_array+0x3c>)
+    472a:	1ba4      	subs	r4, r4, r6
+    472c:	10a4      	asrs	r4, r4, #2
+    472e:	2500      	movs	r5, #0
+    4730:	42a5      	cmp	r5, r4
+    4732:	d109      	bne.n	4748 <__libc_init_array+0x24>
+    4734:	4e0b      	ldr	r6, [pc, #44]	; (4764 <__libc_init_array+0x40>)
+    4736:	4c0c      	ldr	r4, [pc, #48]	; (4768 <__libc_init_array+0x44>)
+    4738:	f000 f818 	bl	476c <_init>
+    473c:	1ba4      	subs	r4, r4, r6
+    473e:	10a4      	asrs	r4, r4, #2
+    4740:	2500      	movs	r5, #0
+    4742:	42a5      	cmp	r5, r4
+    4744:	d105      	bne.n	4752 <__libc_init_array+0x2e>
+    4746:	bd70      	pop	{r4, r5, r6, pc}
+    4748:	f856 3025 	ldr.w	r3, [r6, r5, lsl #2]
+    474c:	4798      	blx	r3
+    474e:	3501      	adds	r5, #1
+    4750:	e7ee      	b.n	4730 <__libc_init_array+0xc>
+    4752:	f856 3025 	ldr.w	r3, [r6, r5, lsl #2]
+    4756:	4798      	blx	r3
+    4758:	3501      	adds	r5, #1
+    475a:	e7f2      	b.n	4742 <__libc_init_array+0x1e>
+    475c:	00004778 	.word	0x00004778
+    4760:	00004778 	.word	0x00004778
+    4764:	00004778 	.word	0x00004778
+    4768:	0000477c 	.word	0x0000477c
+
+0000476c <_init>:
+    476c:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
+    476e:	bf00      	nop
+    4770:	bcf8      	pop	{r3, r4, r5, r6, r7}
+    4772:	bc08      	pop	{r3}
+    4774:	469e      	mov	lr, r3
+    4776:	4770      	bx	lr
+
+00004778 <__init_array_start>:
+    4778:	00004289 	.word	0x00004289
+
+0000477c <_fini>:
+    477c:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
+    477e:	bf00      	nop
+    4780:	bcf8      	pop	{r3, r4, r5, r6, r7}
+    4782:	bc08      	pop	{r3}
+    4784:	469e      	mov	lr, r3
+    4786:	4770      	bx	lr
+
+00004788 <__fini_array_start>:
+    4788:	00004265 	.word	0x00004265
