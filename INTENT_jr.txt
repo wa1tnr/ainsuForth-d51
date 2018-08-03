@@ -1,0 +1,6 @@
+Fri Aug  3 01:28:04 UTC 2018
+
+Intent is to use just the clock settings to get
+the uart working, not to build Jake Read's project
+code in its entirety.  Planned to use process of
+eliminaition (by vast code base reduction).
