@@ -1,0 +1,137 @@
+aibm
+
+# Prerequisites
+# *.d
+
+# Object files
+*.o
+*.ko
+*.obj
+*.elf
+
+# Linker output
+*.ilk
+*.map
+*.exp
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Libraries
+*.lib
+*.a
+*.la
+*.lo
+
+# Shared objects (inc. Windows DLLs)
+*.dll
+*.so
+*.so.*
+*.dylib
+
+# Executables
+*.exe
+*.out
+*.app
+*.i*86
+*.x86_64
+*.hex
+
+# Debug files
+*.dSYM/
+*.su
+*.idb
+*.pdb
+
+# Kernel Module Compile Results
+*.mod*
+*.cmd
+.tmp_versions/
+modules.order
+Module.symvers
+Mkfile.old
+dkms.conf
+_cru*
+doc/Build/
+doc/Jake_Read/loca*
+gcc/AtmelStart.eep
+gcc/atmel_start.d
+gcc/atmel_start.o
+gcc/driver_init.d
+gcc/driver_init.o
+gcc/examples/
+gcc/gcc/gcc/
+gcc/gcc/newfile
+gcc/gcc/samd21g18a_flash_with_bootloader.ld
+gcc/gcc/samd51j19a_flash_with_bootloader.ld---
+gcc/gcc/samd51j19a_flash_with_bootloader.ld---newer
+gcc/gcc/system_samd51.d
+gcc/gcc/system_samd51.o
+gcc/gcc/xdatemydate
+gcc/gpio_local.d
+gcc/gpio_local.o
+gcc/hal/
+gcc/hpl/
+gcc/main.d
+gcc/main.o
+# extra .d files need adding since the global was too extensive
+gcc/usuart.d
+# sacr*
+remot*
+gcc/Makefile__*
+main.c__*
+gcc/usart.d
+# new stuff should not be here:
+apahandler.c
+apahandler.h
+apaport.c
+apaport.h
+current_target
+doc/apahandler.c
+doc/apahandler.h
+doc/apaport.c
+doc/apaport.h
+doc/hardware.h--jake
+doc/jake_main.c
+doc/pin.c
+doc/pin.h
+doc/ringbuffer.c
+doc/ringbuffer.h
+doc/spiport.c
+doc/spiport.h
+doc/stepper.c
+doc/stepper.h
+doc/tmc26.c
+doc/tmc26.h
+doc/uartport.c
+doc/uartport.h
+hardware.h
+pin.c
+pin.h
+ringbuffer.c
+ringbuffer.h
+spiport.c
+spiport.h
+stepper.c
+stepper.h
+tmc26.c
+tmc26.h
+uartport.c
+uartport.h
+# more new modifieds not wanting to update the repos for:
+gcc/AtmelStart.bin
+gcc/AtmelStart.elf
+gcc/AtmelStart.hex
+gcc/AtmelStart.lss
+gcc/AtmelStart.map
+
+blink_lab.d
+blink_lab.o
+caution_lamp.d
+caution_lamp.o
+gcc/AtmelStart.bin
+gcc/AtmelStart.elf
+gcc/AtmelStart.hex
+gcc/AtmelStart.lss
+gcc/AtmelStart.map
