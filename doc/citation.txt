@@ -1,0 +1,22 @@
+
+
+
+
+
+
+Line 8:
+/*
+ * ainsuForth_D51 notice:
+ *
+ * outside project files are from Jake Read.
+ *
+ * mkstepper-v011.c
+ *
+ * Created: 2/5/2018 12:00:35 PM
+ * Author : Jake
+ * https://gitlab.cba.mit.edu/jakeread/atkstepper17/tree/e6559372a14fa69ba360da903480d962d786744f
+ *
+ * https://gitlab.cba.mit.edu/jakeread/atkstepper17/blob/e6559372a14fa69ba360da903480d962d786744f/embedded/mkstepper-v011/mkstepper-v011/main.c
+ *
+ */
+
