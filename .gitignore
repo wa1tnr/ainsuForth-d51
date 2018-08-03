@@ -102,12 +102,8 @@ doc/tmc26.c
 doc/tmc26.h
 doc/uartport.c
 doc/uartport.h
+t.d/
 # more new modifieds not wanting to update the repos for:
-gcc/AtmelStart.bin
-gcc/AtmelStart.elf
-gcc/AtmelStart.hex
-gcc/AtmelStart.lss
-gcc/AtmelStart.map
 blink_lab.d
 blink_lab.o
 caution_lamp.d
