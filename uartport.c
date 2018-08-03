@@ -8,7 +8,7 @@
 /*
  * ainsuForth_D51 notice:
  *
- * outsie project files are from Jake Read.
+ * outside project files are from Jake Read.
  *
  * mkstepper-v011.c
  *
