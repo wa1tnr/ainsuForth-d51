@@ -27,7 +27,6 @@ endif
 SUB_DIRS +=  \
  \
 hpl/pm \
-src \
 gcc \
 hpl/osc32kctrl \
 hpl/ramecc \
@@ -42,8 +41,6 @@ hpl/gclk \
 hpl/oscctrl \
 gcc/gcc \
 hpl/core
-
-INCLUDES = $(SUB_DIRS)
 
 # List the object files
 OBJS +=  \
@@ -68,8 +65,6 @@ gcc/gcc/startup_samd51.o \
 main.o \
 gpio_local.o \
 usart.o \
-src/caution_lamp.o \
-src/blink_lab.o \
 hpl/osc32kctrl/hpl_osc32kctrl.o \
 examples/driver_examples.o \
 driver_init.o \
@@ -102,8 +97,6 @@ OBJS_AS_ARGS +=  \
 "main.o" \
 "gpio_local.o" \
 "usart.o" \
-"src/caution_lamp.o" \
-"src/blink_lab.o" \
 "hpl/osc32kctrl/hpl_osc32kctrl.o" \
 "examples/driver_examples.o" \
 "driver_init.o" \
@@ -141,8 +134,6 @@ DEPS_AS_ARGS +=  \
 "main.d" \
 "gpio_local.d" \
 "usart.d" \
-"src/caution_lamp.d" \
-"src/blink_lab.d" \
 "examples/driver_examples.d" \
 "hal/src/hal_sleep.d" \
 "hpl/sercom/hpl_sercom.d" \
