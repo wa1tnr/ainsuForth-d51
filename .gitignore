@@ -83,10 +83,6 @@ gcc/Makefile__*
 main.c__*
 gcc/usart.d
 # new stuff should not be here:
-apahandler.c
-apahandler.h
-apaport.c
-apaport.h
 current_target
 doc/apahandler.c
 doc/apahandler.h
@@ -106,26 +102,12 @@ doc/tmc26.c
 doc/tmc26.h
 doc/uartport.c
 doc/uartport.h
-hardware.h
-pin.c
-pin.h
-ringbuffer.c
-ringbuffer.h
-spiport.c
-spiport.h
-stepper.c
-stepper.h
-tmc26.c
-tmc26.h
-uartport.c
-uartport.h
 # more new modifieds not wanting to update the repos for:
 gcc/AtmelStart.bin
 gcc/AtmelStart.elf
 gcc/AtmelStart.hex
 gcc/AtmelStart.lss
 gcc/AtmelStart.map
-
 blink_lab.d
 blink_lab.o
 caution_lamp.d
@@ -133,5 +115,4 @@ caution_lamp.o
 gcc/AtmelStart.bin
 gcc/AtmelStart.elf
 gcc/AtmelStart.hex
-gcc/AtmelStart.lss
 gcc/AtmelStart.map
