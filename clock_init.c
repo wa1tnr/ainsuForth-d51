@@ -1,10 +1,6 @@
 // clock_init.c ainsuForth D51
 
 #include "atmel_start.h"
-// #include "gpio_local.h"
-// #include "uartport.h"
-// #include "hardware.h"
-// #include "blinker.h"
 
 void clock_init(void){ // Jake Read
     NVMCTRL->CTRLA.reg |= NVMCTRL_CTRLA_RWS(0);
