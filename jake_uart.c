@@ -4,7 +4,7 @@
 #include "blinker.h"
 // #include "gpio_local.h"
 
-uint8_t byte_seen = 0; // RX data UART
+volatile uint8_t byte_seen = 0; // RX data UART
 
 // Interrupts on the ATSAMD51
 
@@ -23,7 +23,7 @@ void interrupts_setup(void){
     NVIC_EnableIRQ(SERCOM5_1_IRQn); // RX
 }
 
-int jake_uart(void) { // main()
+void jake_uart(void) { // main()
     /* Initialize the SAM system */
     // SystemInit();
 
@@ -69,21 +69,38 @@ int jake_uart(void) { // main()
     where fBAUD is the rate that you want
     where fref is the peripheral clock from GCLK, in this case (and most) 48MHz
     */
-    SERCOM5->USART.BAUD.reg = 45402;
+
+    /*
+
+    RegBAUD = 
+
+    115200 48,000,000 / 16 * 1 - 65536 *
+
+    */
+    // SERCOM5->USART.BAUD.reg = 45402;
+    // SERCOM5->USART.BAUD.reg = 63018;
+    SERCOM5->USART.BAUD.reg = 65326; // 9600 bps
+
+// 63018 for 115200
+
     while(SERCOM5->USART.SYNCBUSY.bit.ENABLE);
     SERCOM5->USART.CTRLA.bit.ENABLE = 1;
 
     interrupts_setup();
 
+/*
     while (1) {
         while(!SERCOM5->USART.INTFLAG.bit.DRE);
         SERCOM5->USART.DATA.reg = (uint8_t)170;
-        blink_LED();
+        // blink_LED();
+        // PORT->Group[0].OUTTGL.reg = (uint32_t)(1 << 23); // blink D13 / PA23
     }
+*/
 }
 
 void SysTick_Handler(void){
-    PORT->Group[1].OUTTGL.reg = (uint32_t)(1 << 14); // blink STLB
+    PORT->Group[0].OUTTGL.reg = (uint32_t)(1 << 18); // blink D6 / PA18
+    // PORT->Group[0].OUTTGL.reg = (uint32_t)(1 << 23); // blink D13 / PA23
 }
 
 // we can then handle the interrupt:
@@ -94,6 +111,7 @@ void SERCOM5_1_Handler(void){
     // however, for this particular register, we read the data from the peripheral to clear the interrupt.
     // uint8_t data = SERCOM5->USART.DATA.reg;
     byte_seen = SERCOM5->USART.DATA.reg;
+    // PORT->Group[0].OUTTGL.reg = (uint32_t)(1 << 23); // blink D13 / PA23
 }
 
 // TODO: make ATSAMD51 doc page for all of this bringup !
