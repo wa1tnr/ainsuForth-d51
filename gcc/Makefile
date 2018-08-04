@@ -73,7 +73,6 @@ gpio_local.o \
 jake_uart.o \
 led_pulse.o \
 hpl/osc32kctrl/hpl_osc32kctrl.o \
-examples/driver_examples.o \
 driver_init.o \
 hpl/sercom/hpl_sercom.o \
 hal/src/hal_gpio.o \
@@ -81,6 +80,8 @@ hal/utils/src/utils_event.o \
 hal/src/hal_sleep.o \
 atmel_start.o \
 hal/src/hal_atomic.o
+
+# examples/driver_examples.o \
 
 OBJS_AS_ARGS +=  \
 "hal/src/hal_io.o" \
@@ -108,7 +109,6 @@ OBJS_AS_ARGS +=  \
 "jake_uart.o" \
 "led_pulse.o" \
 "hpl/osc32kctrl/hpl_osc32kctrl.o" \
-"examples/driver_examples.o" \
 "driver_init.o" \
 "hpl/sercom/hpl_sercom.o" \
 "hal/src/hal_gpio.o" \
@@ -116,6 +116,8 @@ OBJS_AS_ARGS +=  \
 "hal/src/hal_sleep.o" \
 "atmel_start.o" \
 "hal/src/hal_atomic.o"
+
+# "examples/driver_examples.o" \
 
 # List the dependency files
 DEPS := $(OBJS:%.o=%.d)
@@ -147,13 +149,14 @@ DEPS_AS_ARGS +=  \
 "gpio_local.d" \
 "jake_uart.d" \
 "led_pulse.d" \
-"examples/driver_examples.d" \
 "hal/src/hal_sleep.d" \
 "hpl/sercom/hpl_sercom.d" \
 "hal/src/hal_gpio.d" \
 "hal/src/hal_atomic.d" \
 "hpl/oscctrl/hpl_oscctrl.d" \
 "atmel_start.d"
+
+# "examples/driver_examples.d" \
 
 OUTPUT_FILE_NAME :=AtmelStart
 QUOTE := "

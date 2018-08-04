@@ -130,7 +130,7 @@ void system_init(void)
 
 	gpio_set_pin_function(PB03, GPIO_PIN_FUNCTION_OFF);
 
-	USART_0a_init();
+	// USART_0a_init();
 
 	delay_driver_init();
 }

@@ -6,7 +6,7 @@
 #include "atmel_start.h"
 #include "clock_init.h"
 #include "led_pulse.h"
-#include "uart_setup.h"
+// #include "uart_setup.h"
 #include "gpio_local.h"
 #include "jake_uart.h"
 #include "blinker.h"
