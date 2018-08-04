@@ -1,0 +1,14 @@
+
+Sat Aug  4 03:06:28 UTC 2018
+On branch testing-clockey-dd
+
+testing-clockey-dd is a new branch - going forward
+it will focus on trying to use Jake Read's uart code.
+
+&&
+
+testing-clockey-aa  seems to have Jake Read's code
+prominently in main.c and was probably what was
+sought after, to reapproach the uart using Jake's
+technique.
+
