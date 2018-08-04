@@ -70,8 +70,8 @@ main.o \
 blinker.o \
 clock_init.o \
 gpio_local.o \
+jake_uart.o \
 led_pulse.o \
-usart.o \
 hpl/osc32kctrl/hpl_osc32kctrl.o \
 examples/driver_examples.o \
 driver_init.o \
@@ -105,8 +105,8 @@ OBJS_AS_ARGS +=  \
 "blinker.o" \
 "clock_init.o" \
 "gpio_local.o" \
+"jake_uart.o" \
 "led_pulse.o" \
-"usart.o" \
 "hpl/osc32kctrl/hpl_osc32kctrl.o" \
 "examples/driver_examples.o" \
 "driver_init.o" \
@@ -145,8 +145,8 @@ DEPS_AS_ARGS +=  \
 "blinker.d" \
 "clock_init.d" \
 "gpio_local.d" \
+"jake_uart.d" \
 "led_pulse.d" \
-"usart.d" \
 "examples/driver_examples.d" \
 "hal/src/hal_sleep.d" \
 "hpl/sercom/hpl_sercom.d" \
