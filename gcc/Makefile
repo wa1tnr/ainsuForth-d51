@@ -63,6 +63,7 @@ hpl/ramecc/hpl_ramecc.o \
 hal/src/hal_init.o \
 gcc/gcc/startup_samd51.o \
 main.o \
+blinker.o \
 gpio_local.o \
 usart.o \
 hpl/osc32kctrl/hpl_osc32kctrl.o \
@@ -95,6 +96,7 @@ OBJS_AS_ARGS +=  \
 "hal/src/hal_init.o" \
 "gcc/gcc/startup_samd51.o" \
 "main.o" \
+"blinker.o" \
 "gpio_local.o" \
 "usart.o" \
 "hpl/osc32kctrl/hpl_osc32kctrl.o" \
@@ -132,6 +134,7 @@ DEPS_AS_ARGS +=  \
 "driver_init.d" \
 "hpl/osc32kctrl/hpl_osc32kctrl.d" \
 "main.d" \
+"blinker.d" \
 "gpio_local.d" \
 "usart.d" \
 "examples/driver_examples.d" \
