@@ -1,0 +1,8 @@
+The plan now is to reduce the interfering code
+that isn't understood to be required to be
+present.
+
+If the program will run without it, remove it
+(if that seems plausible).
+
+Sat Aug  4 10:34:37 UTC 2018
