@@ -243,6 +243,14 @@ checkout:
 	@git    checkout    --     _stored/AtmelStart.lss
 	@git    checkout    --     _stored/AtmelStart.map
 
+checkout2:
+	# running target 'make checkou2' now
+	@git    checkout    --     AtmelStart.bin
+	@git    checkout    --     AtmelStart.elf
+	@git    checkout    --     AtmelStart.hex
+	@git    checkout    --     AtmelStart.lss
+	@git    checkout    --     AtmelStart.map
+
 #       @git    checkout    --     AtmelStart.eep
 
 # install: arc checkout
