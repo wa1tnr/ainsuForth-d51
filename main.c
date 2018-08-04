@@ -1,5 +1,7 @@
 // main.c ainsuForth D51
 
+// has clock_init() but nothing for the uart - 04:44 UTC 04 AUG 2018
+
 #include "atmel_start.h"
 #include "gpio_local.h"
 #include "uartport.h"
@@ -8,20 +10,6 @@
 #include "clock_init.h"
 
 /* Many changes: by wa1tnr, July 2018 */
-
-/*
-void uSec(void) { }
-void short_timer(void) { } } }
-void raise_LED_pins(void) { } 
-void lower_LED_pins(void) { } 
-void blink_LED(void) { }
-void flicker_LED(void) { }
-void blinkLEDfast(void) { } }
-void activity_LED_demo(void) { }
-void long_long_timer(void) { }
-void clock_init(void){ } // Jake Read
-
-*/
 
 void nmain(void) {
         raise_LED_pins();
