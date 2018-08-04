@@ -91,3 +91,4 @@ main.c__*
 gcc/usart.d
 gcc/clock_init.d
 gcc/led_pulse.d
+gcc/jake_uart.d
