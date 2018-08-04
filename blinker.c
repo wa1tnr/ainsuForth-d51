@@ -2,8 +2,6 @@
 
 #include "atmel_start.h"
 #include "gpio_local.h"
-// #include "uartport.h"
-// #include "hardware.h"
 
 /* Many changes: by wa1tnr, July 2018 */
 
@@ -59,29 +57,5 @@ void long_long_timer(void) {
         for (int i=3; i>1; i--){
             short_timer();
         }
-    }
-}
-
-
-/*
-void clock_init(void){ // Jake Read
-}
-*/
-
-void xnmain(void) {
-        raise_LED_pins();
-	while (1) {
-            flicker_LED();
-            short_timer();
-	}
-}
-
-int xxmain(void) {
-    SystemInit();
-    clock_init();
-    init_act_LED();
-    // nmain();
-    while (1) {
-        // none
     }
 }
