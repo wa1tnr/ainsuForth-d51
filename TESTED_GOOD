@@ -1,26 +1,10 @@
-Tue Jul 31 22:38:32 UTC 2018
-
-  Rechecked after the copyover (at 22:38 UTC) and the
-  program compiles and uploads just fine.
-
-                   - - -
-
   For this branch's present state of revision (working
-  blinkie) -- the state of this repository is now 
+  blinkie) -- the state of this branch in this repository is
 
         TESTED as GOOD    and is complete.
 
   Program is complete (build it stand-alone).
 
-  Target is currently: Adafruit Metro M4 Express.
+  Target is currently: Adafruit Feather M4 Express.
 
-  The Feather M4 Express also works; it's just a blinkie.
-
-  Each one's blinkie is on a different pin (PA16, PA23).
-
-  (see gpio_local.c)
-
-  So *both* of these pins toggle on *both* devices.
-
-Tue Jul 31 17:34:57 UTC 2018
-Tue Jul 31 15:27:43 UTC 2018
+  Sat Aug  4 06:12:41 UTC 2018
