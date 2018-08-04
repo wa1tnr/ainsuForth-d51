@@ -5,6 +5,7 @@
 #include "uartport.h"
 #include "hardware.h"
 #include "blinker.h"
+#include "clock_init.h"
 
 /* Many changes: by wa1tnr, July 2018 */
 
@@ -65,8 +66,8 @@ void long_long_timer(void) {
 }
 
 */
-
-void clock_init(void){ // Jake Read
+#ifdef NEVER_EEE
+void xclock_init(void){ // Jake Read
     NVMCTRL->CTRLA.reg |= NVMCTRL_CTRLA_RWS(0);
     GCLK->CTRLA.bit.SWRST = 1;
     while(GCLK->SYNCBUSY.reg & GCLK_SYNCBUSY_SWRST);
@@ -100,6 +101,7 @@ void clock_init(void){ // Jake Read
 
     MCLK->CPUDIV.reg = MCLK_CPUDIV_DIV_DIV1;
 }
+#endif // #ifdef NEVER_EEE
 
 void nmain(void) {
         raise_LED_pins();

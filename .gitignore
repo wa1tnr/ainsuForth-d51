@@ -89,3 +89,4 @@ remot*
 gcc/Makefile__*
 main.c__*
 gcc/usart.d
+gcc/clock_init.d
