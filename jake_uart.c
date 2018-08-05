@@ -116,6 +116,8 @@ void jake_uart(void) { // main()
         while(!SERCOM5->USART.INTFLAG.bit.TXC); // flush // not in jake's code
 
         // give debug hardware signals to human developer with oscope or human vision
+
+        // pulse width here is 20 uSec:
         PORT->Group[0].OUTTGL.reg = (uint32_t)(1 << 18); // blink  D6 / PA18
         PORT->Group[0].OUTTGL.reg = (uint32_t)(1 << 23); // blink D13 / PA23
 /*
