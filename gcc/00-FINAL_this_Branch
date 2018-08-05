@@ -1,0 +1,18 @@
+Sun Aug  5 05:39:06 UTC 2018
+
+On branch testing-clockey-dd-03-
+
+This branch is closed to new development.  A copy
+(a branch of this branch) has been made elsewhere
+(see testing-clockey-ee-00-).
+
+This program blinks the LED on D13 (if nothing else)
+in its present form.
+
+All then new dev was copied into ./portable.d and then
+removed ('git checkout -- <file>' method, iterated).
+
+It'll be reinstated in testing-clockey-ee-00- and
+in this manner, some semblance of achievement for
+testing-clockey-dd-03- is retained into the future.
+
