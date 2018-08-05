@@ -16,7 +16,7 @@ extern void jake_uart(void); // no .h file haha
 /* Many changes: by wa1tnr, July 2018 */
 
 int main(void) {
-    uint8_t value = 0;
+    // uint8_t value = 0;
     SystemInit();
     clock_init();
     SysTick_Config(5000000);
@@ -31,7 +31,15 @@ int main(void) {
     gpio_set_pin_level(PA23, true); short_timer(); gpio_set_pin_level(PA23, false); short_timer();
     gpio_set_pin_level(PA23, true); short_timer(); gpio_set_pin_level(PA23, false); short_timer();
 
-    // led_pulse();
+    for (int j=7; j>0; j--) {
+        short_timer();
+    }
+
+    while(-1) {
+        led_pulse();
+    }
+
+#ifdef NN_ENDLESS
     while (1) {
         value = byte_seen * 2; // arbitrary scale
         // delay_ms(value); // a form of output - a delay
@@ -40,4 +48,7 @@ int main(void) {
             short_timer();
         } // toggle port pin on and off to represent the byte seen
     }
+#endif // #ifdef NN_ENDLESS
+    while(-1); // bottom trap
+
 }
