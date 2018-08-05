@@ -108,6 +108,9 @@ void jake_uart(void) { // main()
 
     interrupts_setup();
 
+#undef J_ENDLESS
+
+#ifdef J_ENDLESS
     while (1) {
         while(!SERCOM5->USART.INTFLAG.bit.DRE);
         // SERCOM5->USART.DATA.reg   = (uint8_t)170; // presume this means send this byte out the port
@@ -118,8 +121,15 @@ void jake_uart(void) { // main()
         // give debug hardware signals to human developer with oscope or human vision
 
         // pulse width here is 20 uSec:
+#undef SEEN_FIVE_KHZ
+#ifdef SEEN_FIVE_KHZ
         PORT->Group[0].OUTTGL.reg = (uint32_t)(1 << 18); // blink  D6 / PA18
         PORT->Group[0].OUTTGL.reg = (uint32_t)(1 << 23); // blink D13 / PA23
+#endif
+    } // while
+
+#endif // #ifdef J_ENDLESS
+
 /*
   uri https://raw.githubusercontent.com/arduino/ArduinoCore-samd/master/cores/arduino/SERCOM.cpp
 
@@ -147,7 +157,6 @@ void SERCOM::flushUART()
 */
 
 
-    }
 
 }
 
