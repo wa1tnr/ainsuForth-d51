@@ -1,0 +1,207 @@
+     1	Building file: ../hal/src/hal_io.c
+     2	ARM/GNU C Compiler
+     3	"arm-none-eabi-gcc" -x c -mthumb -DDEBUG -Os -ffunction-sections -mlong-calls -g3 -Wall -Werror -c -std=gnu99 \
+     4	-D__SAMD51J19A__ -mcpu=cortex-m4 -mfloat-abi=softfp -mfpu=fpv4-sp-d16 \
+     5	-I"../" -I"../config" -I"../examples" -I"../hal/include" -I"../hal/utils/include" -I"../hpl/core" -I"../hpl/dmac" -I"../hpl/gclk" -I"../hpl/mclk"                       -I"../hpl/oscctrl" -I"../hpl/pm" -I"../hpl/port" -I"../hpl/ramecc" -I"../hpl/sercom"                      -I"../hri" -I"../" -I"../CMSIS/Include" -I"../include"  \
+     6	-MD -MP -MF "hal/src/hal_io.d" -MT"hal/src/hal_io.d" -MT"hal/src/hal_io.o"  -o "hal/src/hal_io.o" "../hal/src/hal_io.c"
+     7	Finished building: ../hal/src/hal_io.c
+     8	Building file: ../hpl/core/hpl_core_m4.c
+     9	ARM/GNU C Compiler
+    10	"arm-none-eabi-gcc" -x c -mthumb -DDEBUG -Os -ffunction-sections -mlong-calls -g3 -Wall -Werror -c -std=gnu99 \
+    11	-D__SAMD51J19A__ -mcpu=cortex-m4 -mfloat-abi=softfp -mfpu=fpv4-sp-d16 \
+    12	-I"../" -I"../config" -I"../examples" -I"../hal/include" -I"../hal/utils/include" -I"../hpl/core" -I"../hpl/dmac" -I"../hpl/gclk" -I"../hpl/mclk"                       -I"../hpl/oscctrl" -I"../hpl/pm" -I"../hpl/port" -I"../hpl/ramecc" -I"../hpl/sercom"                      -I"../hri" -I"../" -I"../CMSIS/Include" -I"../include"  \
+    13	-MD -MP -MF "hpl/core/hpl_core_m4.d" -MT"hpl/core/hpl_core_m4.d" -MT"hpl/core/hpl_core_m4.o"  -o "hpl/core/hpl_core_m4.o" "../hpl/core/hpl_core_m4.c"
+    14	Finished building: ../hpl/core/hpl_core_m4.c
+    15	Building file: ../hal/utils/src/utils_syscalls.c
+    16	ARM/GNU C Compiler
+    17	"arm-none-eabi-gcc" -x c -mthumb -DDEBUG -Os -ffunction-sections -mlong-calls -g3 -Wall -Werror -c -std=gnu99 \
+    18	-D__SAMD51J19A__ -mcpu=cortex-m4 -mfloat-abi=softfp -mfpu=fpv4-sp-d16 \
+    19	-I"../" -I"../config" -I"../examples" -I"../hal/include" -I"../hal/utils/include" -I"../hpl/core" -I"../hpl/dmac" -I"../hpl/gclk" -I"../hpl/mclk"                       -I"../hpl/oscctrl" -I"../hpl/pm" -I"../hpl/port" -I"../hpl/ramecc" -I"../hpl/sercom"                      -I"../hri" -I"../" -I"../CMSIS/Include" -I"../include"  \
+    20	-MD -MP -MF "hal/utils/src/utils_syscalls.d" -MT"hal/utils/src/utils_syscalls.d" -MT"hal/utils/src/utils_syscalls.o"  -o "hal/utils/src/utils_syscalls.o" "../hal/utils/src/utils_syscalls.c"
+    21	Finished building: ../hal/utils/src/utils_syscalls.c
+    22	Building file: ../hal/src/hal_delay.c
+    23	ARM/GNU C Compiler
+    24	"arm-none-eabi-gcc" -x c -mthumb -DDEBUG -Os -ffunction-sections -mlong-calls -g3 -Wall -Werror -c -std=gnu99 \
+    25	-D__SAMD51J19A__ -mcpu=cortex-m4 -mfloat-abi=softfp -mfpu=fpv4-sp-d16 \
+    26	-I"../" -I"../config" -I"../examples" -I"../hal/include" -I"../hal/utils/include" -I"../hpl/core" -I"../hpl/dmac" -I"../hpl/gclk" -I"../hpl/mclk"                       -I"../hpl/oscctrl" -I"../hpl/pm" -I"../hpl/port" -I"../hpl/ramecc" -I"../hpl/sercom"                      -I"../hri" -I"../" -I"../CMSIS/Include" -I"../include"  \
+    27	-MD -MP -MF "hal/src/hal_delay.d" -MT"hal/src/hal_delay.d" -MT"hal/src/hal_delay.o"  -o "hal/src/hal_delay.o" "../hal/src/hal_delay.c"
+    28	Finished building: ../hal/src/hal_delay.c
+    29	Building file: ../hpl/oscctrl/hpl_oscctrl.c
+    30	ARM/GNU C Compiler
+    31	"arm-none-eabi-gcc" -x c -mthumb -DDEBUG -Os -ffunction-sections -mlong-calls -g3 -Wall -Werror -c -std=gnu99 \
+    32	-D__SAMD51J19A__ -mcpu=cortex-m4 -mfloat-abi=softfp -mfpu=fpv4-sp-d16 \
+    33	-I"../" -I"../config" -I"../examples" -I"../hal/include" -I"../hal/utils/include" -I"../hpl/core" -I"../hpl/dmac" -I"../hpl/gclk" -I"../hpl/mclk"                       -I"../hpl/oscctrl" -I"../hpl/pm" -I"../hpl/port" -I"../hpl/ramecc" -I"../hpl/sercom"                      -I"../hri" -I"../" -I"../CMSIS/Include" -I"../include"  \
+    34	-MD -MP -MF "hpl/oscctrl/hpl_oscctrl.d" -MT"hpl/oscctrl/hpl_oscctrl.d" -MT"hpl/oscctrl/hpl_oscctrl.o"  -o "hpl/oscctrl/hpl_oscctrl.o" "../hpl/oscctrl/hpl_oscctrl.c"
+    35	Finished building: ../hpl/oscctrl/hpl_oscctrl.c
+    36	Building file: ../hpl/gclk/hpl_gclk.c
+    37	ARM/GNU C Compiler
+    38	"arm-none-eabi-gcc" -x c -mthumb -DDEBUG -Os -ffunction-sections -mlong-calls -g3 -Wall -Werror -c -std=gnu99 \
+    39	-D__SAMD51J19A__ -mcpu=cortex-m4 -mfloat-abi=softfp -mfpu=fpv4-sp-d16 \
+    40	-I"../" -I"../config" -I"../examples" -I"../hal/include" -I"../hal/utils/include" -I"../hpl/core" -I"../hpl/dmac" -I"../hpl/gclk" -I"../hpl/mclk"                       -I"../hpl/oscctrl" -I"../hpl/pm" -I"../hpl/port" -I"../hpl/ramecc" -I"../hpl/sercom"                      -I"../hri" -I"../" -I"../CMSIS/Include" -I"../include"  \
+    41	-MD -MP -MF "hpl/gclk/hpl_gclk.d" -MT"hpl/gclk/hpl_gclk.d" -MT"hpl/gclk/hpl_gclk.o"  -o "hpl/gclk/hpl_gclk.o" "../hpl/gclk/hpl_gclk.c"
+    42	Finished building: ../hpl/gclk/hpl_gclk.c
+    43	Building file: ../hal/utils/src/utils_list.c
+    44	ARM/GNU C Compiler
+    45	"arm-none-eabi-gcc" -x c -mthumb -DDEBUG -Os -ffunction-sections -mlong-calls -g3 -Wall -Werror -c -std=gnu99 \
+    46	-D__SAMD51J19A__ -mcpu=cortex-m4 -mfloat-abi=softfp -mfpu=fpv4-sp-d16 \
+    47	-I"../" -I"../config" -I"../examples" -I"../hal/include" -I"../hal/utils/include" -I"../hpl/core" -I"../hpl/dmac" -I"../hpl/gclk" -I"../hpl/mclk"                       -I"../hpl/oscctrl" -I"../hpl/pm" -I"../hpl/port" -I"../hpl/ramecc" -I"../hpl/sercom"                      -I"../hri" -I"../" -I"../CMSIS/Include" -I"../include"  \
+    48	-MD -MP -MF "hal/utils/src/utils_list.d" -MT"hal/utils/src/utils_list.d" -MT"hal/utils/src/utils_list.o"  -o "hal/utils/src/utils_list.o" "../hal/utils/src/utils_list.c"
+    49	Finished building: ../hal/utils/src/utils_list.c
+    50	Building file: ../gcc/system_samd51.c
+    51	ARM/GNU C Compiler
+    52	"arm-none-eabi-gcc" -x c -mthumb -DDEBUG -Os -ffunction-sections -mlong-calls -g3 -Wall -Werror -c -std=gnu99 \
+    53	-D__SAMD51J19A__ -mcpu=cortex-m4 -mfloat-abi=softfp -mfpu=fpv4-sp-d16 \
+    54	-I"../" -I"../config" -I"../examples" -I"../hal/include" -I"../hal/utils/include" -I"../hpl/core" -I"../hpl/dmac" -I"../hpl/gclk" -I"../hpl/mclk"                       -I"../hpl/oscctrl" -I"../hpl/pm" -I"../hpl/port" -I"../hpl/ramecc" -I"../hpl/sercom"                      -I"../hri" -I"../" -I"../CMSIS/Include" -I"../include"  \
+    55	-MD -MP -MF "gcc/system_samd51.d" -MT"gcc/system_samd51.d" -MT"gcc/system_samd51.o"  -o "gcc/system_samd51.o" "../gcc/system_samd51.c"
+    56	Finished building: ../gcc/system_samd51.c
+    57	Building file: ../hal/utils/src/utils_assert.c
+    58	ARM/GNU C Compiler
+    59	"arm-none-eabi-gcc" -x c -mthumb -DDEBUG -Os -ffunction-sections -mlong-calls -g3 -Wall -Werror -c -std=gnu99 \
+    60	-D__SAMD51J19A__ -mcpu=cortex-m4 -mfloat-abi=softfp -mfpu=fpv4-sp-d16 \
+    61	-I"../" -I"../config" -I"../examples" -I"../hal/include" -I"../hal/utils/include" -I"../hpl/core" -I"../hpl/dmac" -I"../hpl/gclk" -I"../hpl/mclk"                       -I"../hpl/oscctrl" -I"../hpl/pm" -I"../hpl/port" -I"../hpl/ramecc" -I"../hpl/sercom"                      -I"../hri" -I"../" -I"../CMSIS/Include" -I"../include"  \
+    62	-MD -MP -MF "hal/utils/src/utils_assert.d" -MT"hal/utils/src/utils_assert.d" -MT"hal/utils/src/utils_assert.o"  -o "hal/utils/src/utils_assert.o" "../hal/utils/src/utils_assert.c"
+    63	Finished building: ../hal/utils/src/utils_assert.c
+    64	Building file: ../hpl/dmac/hpl_dmac.c
+    65	ARM/GNU C Compiler
+    66	"arm-none-eabi-gcc" -x c -mthumb -DDEBUG -Os -ffunction-sections -mlong-calls -g3 -Wall -Werror -c -std=gnu99 \
+    67	-D__SAMD51J19A__ -mcpu=cortex-m4 -mfloat-abi=softfp -mfpu=fpv4-sp-d16 \
+    68	-I"../" -I"../config" -I"../examples" -I"../hal/include" -I"../hal/utils/include" -I"../hpl/core" -I"../hpl/dmac" -I"../hpl/gclk" -I"../hpl/mclk"                       -I"../hpl/oscctrl" -I"../hpl/pm" -I"../hpl/port" -I"../hpl/ramecc" -I"../hpl/sercom"                      -I"../hri" -I"../" -I"../CMSIS/Include" -I"../include"  \
+    69	-MD -MP -MF "hpl/dmac/hpl_dmac.d" -MT"hpl/dmac/hpl_dmac.d" -MT"hpl/dmac/hpl_dmac.o"  -o "hpl/dmac/hpl_dmac.o" "../hpl/dmac/hpl_dmac.c"
+    70	Finished building: ../hpl/dmac/hpl_dmac.c
+    71	Building file: ../hpl/pm/hpl_pm.c
+    72	ARM/GNU C Compiler
+    73	"arm-none-eabi-gcc" -x c -mthumb -DDEBUG -Os -ffunction-sections -mlong-calls -g3 -Wall -Werror -c -std=gnu99 \
+    74	-D__SAMD51J19A__ -mcpu=cortex-m4 -mfloat-abi=softfp -mfpu=fpv4-sp-d16 \
+    75	-I"../" -I"../config" -I"../examples" -I"../hal/include" -I"../hal/utils/include" -I"../hpl/core" -I"../hpl/dmac" -I"../hpl/gclk" -I"../hpl/mclk"                       -I"../hpl/oscctrl" -I"../hpl/pm" -I"../hpl/port" -I"../hpl/ramecc" -I"../hpl/sercom"                      -I"../hri" -I"../" -I"../CMSIS/Include" -I"../include"  \
+    76	-MD -MP -MF "hpl/pm/hpl_pm.d" -MT"hpl/pm/hpl_pm.d" -MT"hpl/pm/hpl_pm.o"  -o "hpl/pm/hpl_pm.o" "../hpl/pm/hpl_pm.c"
+    77	Finished building: ../hpl/pm/hpl_pm.c
+    78	Building file: ../hal/src/hal_usart_sync.c
+    79	ARM/GNU C Compiler
+    80	"arm-none-eabi-gcc" -x c -mthumb -DDEBUG -Os -ffunction-sections -mlong-calls -g3 -Wall -Werror -c -std=gnu99 \
+    81	-D__SAMD51J19A__ -mcpu=cortex-m4 -mfloat-abi=softfp -mfpu=fpv4-sp-d16 \
+    82	-I"../" -I"../config" -I"../examples" -I"../hal/include" -I"../hal/utils/include" -I"../hpl/core" -I"../hpl/dmac" -I"../hpl/gclk" -I"../hpl/mclk"                       -I"../hpl/oscctrl" -I"../hpl/pm" -I"../hpl/port" -I"../hpl/ramecc" -I"../hpl/sercom"                      -I"../hri" -I"../" -I"../CMSIS/Include" -I"../include"  \
+    83	-MD -MP -MF "hal/src/hal_usart_sync.d" -MT"hal/src/hal_usart_sync.d" -MT"hal/src/hal_usart_sync.o"  -o "hal/src/hal_usart_sync.o" "../hal/src/hal_usart_sync.c"
+    84	Finished building: ../hal/src/hal_usart_sync.c
+    85	Building file: ../hpl/ramecc/hpl_ramecc.c
+    86	ARM/GNU C Compiler
+    87	"arm-none-eabi-gcc" -x c -mthumb -DDEBUG -Os -ffunction-sections -mlong-calls -g3 -Wall -Werror -c -std=gnu99 \
+    88	-D__SAMD51J19A__ -mcpu=cortex-m4 -mfloat-abi=softfp -mfpu=fpv4-sp-d16 \
+    89	-I"../" -I"../config" -I"../examples" -I"../hal/include" -I"../hal/utils/include" -I"../hpl/core" -I"../hpl/dmac" -I"../hpl/gclk" -I"../hpl/mclk"                       -I"../hpl/oscctrl" -I"../hpl/pm" -I"../hpl/port" -I"../hpl/ramecc" -I"../hpl/sercom"                      -I"../hri" -I"../" -I"../CMSIS/Include" -I"../include"  \
+    90	-MD -MP -MF "hpl/ramecc/hpl_ramecc.d" -MT"hpl/ramecc/hpl_ramecc.d" -MT"hpl/ramecc/hpl_ramecc.o"  -o "hpl/ramecc/hpl_ramecc.o" "../hpl/ramecc/hpl_ramecc.c"
+    91	Finished building: ../hpl/ramecc/hpl_ramecc.c
+    92	Building file: ../hal/src/hal_init.c
+    93	ARM/GNU C Compiler
+    94	"arm-none-eabi-gcc" -x c -mthumb -DDEBUG -Os -ffunction-sections -mlong-calls -g3 -Wall -Werror -c -std=gnu99 \
+    95	-D__SAMD51J19A__ -mcpu=cortex-m4 -mfloat-abi=softfp -mfpu=fpv4-sp-d16 \
+    96	-I"../" -I"../config" -I"../examples" -I"../hal/include" -I"../hal/utils/include" -I"../hpl/core" -I"../hpl/dmac" -I"../hpl/gclk" -I"../hpl/mclk"                       -I"../hpl/oscctrl" -I"../hpl/pm" -I"../hpl/port" -I"../hpl/ramecc" -I"../hpl/sercom"                      -I"../hri" -I"../" -I"../CMSIS/Include" -I"../include"  \
+    97	-MD -MP -MF "hal/src/hal_init.d" -MT"hal/src/hal_init.d" -MT"hal/src/hal_init.o"  -o "hal/src/hal_init.o" "../hal/src/hal_init.c"
+    98	Finished building: ../hal/src/hal_init.c
+    99	Building file: ../gcc/gcc/startup_samd51.c
+   100	ARM/GNU C Compiler
+   101	"arm-none-eabi-gcc" -x c -mthumb -DDEBUG -Os -ffunction-sections -mlong-calls -g3 -Wall -Werror -c -std=gnu99 \
+   102	-D__SAMD51J19A__ -mcpu=cortex-m4 -mfloat-abi=softfp -mfpu=fpv4-sp-d16 \
+   103	-I"../" -I"../config" -I"../examples" -I"../hal/include" -I"../hal/utils/include" -I"../hpl/core" -I"../hpl/dmac" -I"../hpl/gclk" -I"../hpl/mclk"                       -I"../hpl/oscctrl" -I"../hpl/pm" -I"../hpl/port" -I"../hpl/ramecc" -I"../hpl/sercom"                      -I"../hri" -I"../" -I"../CMSIS/Include" -I"../include"  \
+   104	-MD -MP -MF "gcc/gcc/startup_samd51.d" -MT"gcc/gcc/startup_samd51.d" -MT"gcc/gcc/startup_samd51.o"  -o "gcc/gcc/startup_samd51.o" "../gcc/gcc/startup_samd51.c"
+   105	Finished building: ../gcc/gcc/startup_samd51.c
+   106	Building file: ../main.c
+   107	ARM/GNU C Compiler
+   108	"arm-none-eabi-gcc" -x c -mthumb -DDEBUG -Os -ffunction-sections -mlong-calls -g3 -Wall -Werror -c -std=gnu99 \
+   109	-D__SAMD51J19A__ -mcpu=cortex-m4 -mfloat-abi=softfp -mfpu=fpv4-sp-d16 \
+   110	-I"../" -I"../config" -I"../examples" -I"../hal/include" -I"../hal/utils/include" -I"../hpl/core" -I"../hpl/dmac" -I"../hpl/gclk" -I"../hpl/mclk"                       -I"../hpl/oscctrl" -I"../hpl/pm" -I"../hpl/port" -I"../hpl/ramecc" -I"../hpl/sercom"                      -I"../hri" -I"../" -I"../CMSIS/Include" -I"../include"  \
+   111	-MD -MP -MF "main.d" -MT"main.d" -MT"main.o"  -o "main.o" "../main.c"
+   112	Finished building: ../main.c
+   113	Building file: ../blinker.c
+   114	ARM/GNU C Compiler
+   115	"arm-none-eabi-gcc" -x c -mthumb -DDEBUG -Os -ffunction-sections -mlong-calls -g3 -Wall -Werror -c -std=gnu99 \
+   116	-D__SAMD51J19A__ -mcpu=cortex-m4 -mfloat-abi=softfp -mfpu=fpv4-sp-d16 \
+   117	-I"../" -I"../config" -I"../examples" -I"../hal/include" -I"../hal/utils/include" -I"../hpl/core" -I"../hpl/dmac" -I"../hpl/gclk" -I"../hpl/mclk"                       -I"../hpl/oscctrl" -I"../hpl/pm" -I"../hpl/port" -I"../hpl/ramecc" -I"../hpl/sercom"                      -I"../hri" -I"../" -I"../CMSIS/Include" -I"../include"  \
+   118	-MD -MP -MF "blinker.d" -MT"blinker.d" -MT"blinker.o"  -o "blinker.o" "../blinker.c"
+   119	Finished building: ../blinker.c
+   120	Building file: ../clock_init.c
+   121	ARM/GNU C Compiler
+   122	"arm-none-eabi-gcc" -x c -mthumb -DDEBUG -Os -ffunction-sections -mlong-calls -g3 -Wall -Werror -c -std=gnu99 \
+   123	-D__SAMD51J19A__ -mcpu=cortex-m4 -mfloat-abi=softfp -mfpu=fpv4-sp-d16 \
+   124	-I"../" -I"../config" -I"../examples" -I"../hal/include" -I"../hal/utils/include" -I"../hpl/core" -I"../hpl/dmac" -I"../hpl/gclk" -I"../hpl/mclk"                       -I"../hpl/oscctrl" -I"../hpl/pm" -I"../hpl/port" -I"../hpl/ramecc" -I"../hpl/sercom"                      -I"../hri" -I"../" -I"../CMSIS/Include" -I"../include"  \
+   125	-MD -MP -MF "clock_init.d" -MT"clock_init.d" -MT"clock_init.o"  -o "clock_init.o" "../clock_init.c"
+   126	Finished building: ../clock_init.c
+   127	Building file: ../gpio_local.c
+   128	ARM/GNU C Compiler
+   129	"arm-none-eabi-gcc" -x c -mthumb -DDEBUG -Os -ffunction-sections -mlong-calls -g3 -Wall -Werror -c -std=gnu99 \
+   130	-D__SAMD51J19A__ -mcpu=cortex-m4 -mfloat-abi=softfp -mfpu=fpv4-sp-d16 \
+   131	-I"../" -I"../config" -I"../examples" -I"../hal/include" -I"../hal/utils/include" -I"../hpl/core" -I"../hpl/dmac" -I"../hpl/gclk" -I"../hpl/mclk"                       -I"../hpl/oscctrl" -I"../hpl/pm" -I"../hpl/port" -I"../hpl/ramecc" -I"../hpl/sercom"                      -I"../hri" -I"../" -I"../CMSIS/Include" -I"../include"  \
+   132	-MD -MP -MF "gpio_local.d" -MT"gpio_local.d" -MT"gpio_local.o"  -o "gpio_local.o" "../gpio_local.c"
+   133	Finished building: ../gpio_local.c
+   134	Building file: ../jake_uart.c
+   135	ARM/GNU C Compiler
+   136	"arm-none-eabi-gcc" -x c -mthumb -DDEBUG -Os -ffunction-sections -mlong-calls -g3 -Wall -Werror -c -std=gnu99 \
+   137	-D__SAMD51J19A__ -mcpu=cortex-m4 -mfloat-abi=softfp -mfpu=fpv4-sp-d16 \
+   138	-I"../" -I"../config" -I"../examples" -I"../hal/include" -I"../hal/utils/include" -I"../hpl/core" -I"../hpl/dmac" -I"../hpl/gclk" -I"../hpl/mclk"                       -I"../hpl/oscctrl" -I"../hpl/pm" -I"../hpl/port" -I"../hpl/ramecc" -I"../hpl/sercom"                      -I"../hri" -I"../" -I"../CMSIS/Include" -I"../include"  \
+   139	-MD -MP -MF "jake_uart.d" -MT"jake_uart.d" -MT"jake_uart.o"  -o "jake_uart.o" "../jake_uart.c"
+   140	Finished building: ../jake_uart.c
+   141	Building file: ../led_pulse.c
+   142	ARM/GNU C Compiler
+   143	"arm-none-eabi-gcc" -x c -mthumb -DDEBUG -Os -ffunction-sections -mlong-calls -g3 -Wall -Werror -c -std=gnu99 \
+   144	-D__SAMD51J19A__ -mcpu=cortex-m4 -mfloat-abi=softfp -mfpu=fpv4-sp-d16 \
+   145	-I"../" -I"../config" -I"../examples" -I"../hal/include" -I"../hal/utils/include" -I"../hpl/core" -I"../hpl/dmac" -I"../hpl/gclk" -I"../hpl/mclk"                       -I"../hpl/oscctrl" -I"../hpl/pm" -I"../hpl/port" -I"../hpl/ramecc" -I"../hpl/sercom"                      -I"../hri" -I"../" -I"../CMSIS/Include" -I"../include"  \
+   146	-MD -MP -MF "led_pulse.d" -MT"led_pulse.d" -MT"led_pulse.o"  -o "led_pulse.o" "../led_pulse.c"
+   147	Finished building: ../led_pulse.c
+   148	Building file: ../hpl/sercom/hpl_sercom.c
+   149	ARM/GNU C Compiler
+   150	"arm-none-eabi-gcc" -x c -mthumb -DDEBUG -Os -ffunction-sections -mlong-calls -g3 -Wall -Werror -c -std=gnu99 \
+   151	-D__SAMD51J19A__ -mcpu=cortex-m4 -mfloat-abi=softfp -mfpu=fpv4-sp-d16 \
+   152	-I"../" -I"../config" -I"../examples" -I"../hal/include" -I"../hal/utils/include" -I"../hpl/core" -I"../hpl/dmac" -I"../hpl/gclk" -I"../hpl/mclk"                       -I"../hpl/oscctrl" -I"../hpl/pm" -I"../hpl/port" -I"../hpl/ramecc" -I"../hpl/sercom"                      -I"../hri" -I"../" -I"../CMSIS/Include" -I"../include"  \
+   153	-MD -MP -MF "hpl/sercom/hpl_sercom.d" -MT"hpl/sercom/hpl_sercom.d" -MT"hpl/sercom/hpl_sercom.o"  -o "hpl/sercom/hpl_sercom.o" "../hpl/sercom/hpl_sercom.c"
+   154	Finished building: ../hpl/sercom/hpl_sercom.c
+   155	Building file: ../hal/src/hal_gpio.c
+   156	ARM/GNU C Compiler
+   157	"arm-none-eabi-gcc" -x c -mthumb -DDEBUG -Os -ffunction-sections -mlong-calls -g3 -Wall -Werror -c -std=gnu99 \
+   158	-D__SAMD51J19A__ -mcpu=cortex-m4 -mfloat-abi=softfp -mfpu=fpv4-sp-d16 \
+   159	-I"../" -I"../config" -I"../examples" -I"../hal/include" -I"../hal/utils/include" -I"../hpl/core" -I"../hpl/dmac" -I"../hpl/gclk" -I"../hpl/mclk"                       -I"../hpl/oscctrl" -I"../hpl/pm" -I"../hpl/port" -I"../hpl/ramecc" -I"../hpl/sercom"                      -I"../hri" -I"../" -I"../CMSIS/Include" -I"../include"  \
+   160	-MD -MP -MF "hal/src/hal_gpio.d" -MT"hal/src/hal_gpio.d" -MT"hal/src/hal_gpio.o"  -o "hal/src/hal_gpio.o" "../hal/src/hal_gpio.c"
+   161	Finished building: ../hal/src/hal_gpio.c
+   162	Building file: ../hal/utils/src/utils_event.c
+   163	ARM/GNU C Compiler
+   164	"arm-none-eabi-gcc" -x c -mthumb -DDEBUG -Os -ffunction-sections -mlong-calls -g3 -Wall -Werror -c -std=gnu99 \
+   165	-D__SAMD51J19A__ -mcpu=cortex-m4 -mfloat-abi=softfp -mfpu=fpv4-sp-d16 \
+   166	-I"../" -I"../config" -I"../examples" -I"../hal/include" -I"../hal/utils/include" -I"../hpl/core" -I"../hpl/dmac" -I"../hpl/gclk" -I"../hpl/mclk"                       -I"../hpl/oscctrl" -I"../hpl/pm" -I"../hpl/port" -I"../hpl/ramecc" -I"../hpl/sercom"                      -I"../hri" -I"../" -I"../CMSIS/Include" -I"../include"  \
+   167	-MD -MP -MF "hal/utils/src/utils_event.d" -MT"hal/utils/src/utils_event.d" -MT"hal/utils/src/utils_event.o"  -o "hal/utils/src/utils_event.o" "../hal/utils/src/utils_event.c"
+   168	Finished building: ../hal/utils/src/utils_event.c
+   169	Building file: ../hal/src/hal_sleep.c
+   170	ARM/GNU C Compiler
+   171	"arm-none-eabi-gcc" -x c -mthumb -DDEBUG -Os -ffunction-sections -mlong-calls -g3 -Wall -Werror -c -std=gnu99 \
+   172	-D__SAMD51J19A__ -mcpu=cortex-m4 -mfloat-abi=softfp -mfpu=fpv4-sp-d16 \
+   173	-I"../" -I"../config" -I"../examples" -I"../hal/include" -I"../hal/utils/include" -I"../hpl/core" -I"../hpl/dmac" -I"../hpl/gclk" -I"../hpl/mclk"                       -I"../hpl/oscctrl" -I"../hpl/pm" -I"../hpl/port" -I"../hpl/ramecc" -I"../hpl/sercom"                      -I"../hri" -I"../" -I"../CMSIS/Include" -I"../include"  \
+   174	-MD -MP -MF "hal/src/hal_sleep.d" -MT"hal/src/hal_sleep.d" -MT"hal/src/hal_sleep.o"  -o "hal/src/hal_sleep.o" "../hal/src/hal_sleep.c"
+   175	Finished building: ../hal/src/hal_sleep.c
+   176	Building file: ../atmel_start.c
+   177	ARM/GNU C Compiler
+   178	"arm-none-eabi-gcc" -x c -mthumb -DDEBUG -Os -ffunction-sections -mlong-calls -g3 -Wall -Werror -c -std=gnu99 \
+   179	-D__SAMD51J19A__ -mcpu=cortex-m4 -mfloat-abi=softfp -mfpu=fpv4-sp-d16 \
+   180	-I"../" -I"../config" -I"../examples" -I"../hal/include" -I"../hal/utils/include" -I"../hpl/core" -I"../hpl/dmac" -I"../hpl/gclk" -I"../hpl/mclk"                       -I"../hpl/oscctrl" -I"../hpl/pm" -I"../hpl/port" -I"../hpl/ramecc" -I"../hpl/sercom"                      -I"../hri" -I"../" -I"../CMSIS/Include" -I"../include"  \
+   181	-MD -MP -MF "atmel_start.d" -MT"atmel_start.d" -MT"atmel_start.o"  -o "atmel_start.o" "../atmel_start.c"
+   182	Finished building: ../atmel_start.c
+   183	Building file: ../hal/src/hal_atomic.c
+   184	ARM/GNU C Compiler
+   185	"arm-none-eabi-gcc" -x c -mthumb -DDEBUG -Os -ffunction-sections -mlong-calls -g3 -Wall -Werror -c -std=gnu99 \
+   186	-D__SAMD51J19A__ -mcpu=cortex-m4 -mfloat-abi=softfp -mfpu=fpv4-sp-d16 \
+   187	-I"../" -I"../config" -I"../examples" -I"../hal/include" -I"../hal/utils/include" -I"../hpl/core" -I"../hpl/dmac" -I"../hpl/gclk" -I"../hpl/mclk"                       -I"../hpl/oscctrl" -I"../hpl/pm" -I"../hpl/port" -I"../hpl/ramecc" -I"../hpl/sercom"                      -I"../hri" -I"../" -I"../CMSIS/Include" -I"../include"  \
+   188	-MD -MP -MF "hal/src/hal_atomic.d" -MT"hal/src/hal_atomic.d" -MT"hal/src/hal_atomic.o"  -o "hal/src/hal_atomic.o" "../hal/src/hal_atomic.c"
+   189	Finished building: ../hal/src/hal_atomic.c
+   190	Building target: AtmelStart.elf
+   191	Invoking: ARM/GNU Linker
+   192	"arm-none-eabi-gcc" -o AtmelStart.elf "hal/src/hal_io.o" "hpl/core/hpl_core_m4.o" "hal/utils/src/utils_syscalls.o" "hal/src/hal_delay.o" "hpl/oscctrl/hpl_oscctrl.o" "hpl/gclk/hpl_gclk.o" "hal/utils/src/utils_list.o" "gcc/system_samd51.o" "hal/utils/src/utils_assert.o" "hpl/dmac/hpl_dmac.o" "hpl/pm/hpl_pm.o" "hal/src/hal_usart_sync.o" "hpl/ramecc/hpl_ramecc.o" "hal/src/hal_init.o" "gcc/gcc/startup_samd51.o" "main.o" "blinker.o" "clock_init.o" "gpio_local.o" "jake_uart.o" "led_pulse.o" "hpl/sercom/hpl_sercom.o" "hal/src/hal_gpio.o" "hal/utils/src/utils_event.o" "hal/src/hal_sleep.o" "atmel_start.o" "hal/src/hal_atomic.o" -Wl,--start-group -lm -Wl,--end-group -mthumb \
+   193	-Wl,-Map="AtmelStart.map" --specs=nano.specs -Wl,--gc-sections -mcpu=cortex-m4 \
+   194	 \
+   195	-T"../gcc/gcc/samd51j19a_flash_with_bootloader.ld" \
+   196	-L"../gcc/gcc"
+   197	Finished building target: AtmelStart.elf
+   198	"arm-none-eabi-objcopy" -O binary "AtmelStart.elf" "AtmelStart.bin"
+   199	"arm-none-eabi-objcopy" -O ihex -R .eeprom -R .fuse -R .lock -R .signature  \
+   200	        "AtmelStart.elf" "AtmelStart.hex"
+   201	"arm-none-eabi-objcopy" -j .eeprom --set-section-flags=.eeprom=alloc,load --change-section-lma \
+   202	        .eeprom=0 --no-change-warnings -O binary "AtmelStart.elf" \
+   203	        "AtmelStart.eep" || exit 0
+   204	"arm-none-eabi-objdump" -h -S "AtmelStart.elf" > "AtmelStart.lss"
+   205	"arm-none-eabi-size" "AtmelStart.elf"
+   206	   text	   data	    bss	    dec	    hex	filename
+   207	   1916	      4	  49204	  51124	   c7b4	AtmelStart.elf
