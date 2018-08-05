@@ -1,0 +1,14 @@
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+        portable.d/
+
+no changes added to commit (use "git add" and/or "git commit -a")
+chris@laz:~/Git/ainsuForth-d51$ git checkout -- atmel_start_pins.h 
+chris@laz:~/Git/ainsuForth-d51$ git checkout -- gpio_local.c
+chris@laz:~/Git/ainsuForth-d51$ git checkout -- jake_uart.c
+chris@laz:~/Git/ainsuForth-d51$ cp -p gcc/Makefile portable.d/
+chris@laz:~/Git/ainsuForth-d51$ git checkout -- gcc/Makefile
+chris@laz:~/Git/ainsuForth-d51$ 
+

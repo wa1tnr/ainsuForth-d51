@@ -1,0 +1,15 @@
+
+Purpose of this 'portable' (ran out of fun words,
+this is itt)
+
+.. purpose is to preserve 'interesting' changes without
+clobbering the existing, more structured BRANCH.
+
+Intent is to create another branch with the new stuff innit.
+
+Progress: interesting oscilloscope work tonight.  Still do
+not see output on the TX line (but the RX line does get
+something very structured from PiUART).
+
+  05 Aug Sunday 05:16 UTC
+
