@@ -1,3 +1,29 @@
+
+  Program outputs on the oscilloscope for D6 and for the RX line
+  (when chars are sent from PiUARt).
+
+  Look at 'u' vs 'U' (lower case 'u' typed on the keyboard that's
+  piped through the PiUART to the Feather M4 Express TX/RX pair
+  (okay, the RX port pin).
+
+  The 'u' and 'U' are good as they show a regular pulse train, with
+  just one difference between them.
+
+  Set the scope time base to 25 uSec (57 KHz seems to be the data rate,
+  according to the oscope's measure function).
+
+  Further investigation showed the Frequency measured was about
+  half the baud rate (38,400 bps shows as 19.14 KHz).
+
+  So the 57 KHz exposes a 114,000 bps data channel (115,200 bps).
+
+  Sometimes the scope measures half again (28.5 KHz where 57 KHz
+  is expected).  Pressing 'u' vs 'U' unmasks this behavior.
+
+  Looks like it's sampling using a best guess as to when data is
+  being signaled (and screens out the quiet periods to get its
+  frequency estimate).
+
   For this branch's present state of revision (working
   blinkie) -- the state of this branch in this repository is
 
@@ -7,4 +33,4 @@
 
   Target is currently: Adafruit Feather M4 Express.
 
-  Sat Aug  4 06:12:41 UTC 2018
+  Sun Aug  5 06:28:59 UTC 2018
