@@ -234,7 +234,7 @@
 // <i> Indicates whether configuration for DFLL is enabled or not
 // <id> enable_dfll
 #ifndef CONF_DFLL_CONFIG
-#define CONF_DFLL_CONFIG 0
+#define CONF_DFLL_CONFIG 1
 #endif
 
 // <y> Reference Clock Source
@@ -261,7 +261,7 @@
 // <i> Indicates whether DFLL is enabled or not
 // <id> dfll_arch_enable
 #ifndef CONF_DFLL_ENABLE
-#define CONF_DFLL_ENABLE 0
+#define CONF_DFLL_ENABLE 1
 #endif
 
 // <q> On Demand Control
@@ -282,7 +282,7 @@
 // <i> Indicates whether USB Clock Recovery Mode is enabled or not
 // <id> dfll_arch_usbcrm
 #ifndef CONF_DFLL_USBCRM
-#define CONF_DFLL_USBCRM 0
+#define CONF_DFLL_USBCRM 1
 #endif
 
 // <q> Wait Lock
@@ -310,7 +310,7 @@
 // <i> Indicates whether Chill Cycle Disable is enabled or not
 // <id> dfll_arch_ccdis
 #ifndef CONF_DFLL_CCDIS
-#define CONF_DFLL_CCDIS 0
+#define CONF_DFLL_CCDIS 1
 #endif
 
 // <q> Lose Lock After Wake
@@ -357,7 +357,7 @@
 // <i> Indicates whether Overwrite Calibration value of DFLL
 // <id> dfll_arch_calibration
 #ifndef CONF_DFLL_OVERWRITE_CALIBRATION
-#define CONF_DFLL_OVERWRITE_CALIBRATION 0
+#define CONF_DFLL_OVERWRITE_CALIBRATION 1
 #endif
 
 // <o> Coarse Value <0x0-0x3F>
@@ -382,7 +382,7 @@
 // <i> Indicates whether configuration for FDPLL0 is enabled or not
 // <id> enable_fdpll0
 #ifndef CONF_FDPLL0_CONFIG
-#define CONF_FDPLL0_CONFIG 1
+#define CONF_FDPLL0_CONFIG 0
 #endif
 
 // <y> Reference Clock Source
@@ -412,7 +412,7 @@
 // <i> Indicates whether Digital Phase Locked Loop is enabled or not
 // <id> fdpll0_arch_enable
 #ifndef CONF_FDPLL0_ENABLE
-#define CONF_FDPLL0_ENABLE 1
+#define CONF_FDPLL0_ENABLE 0
 #endif
 
 // <q> On Demand Control
