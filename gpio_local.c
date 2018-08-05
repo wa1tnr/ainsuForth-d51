@@ -2,11 +2,8 @@
 #include "atmel_start_pins.h"
 
 void init_act_LED(void) {
-    gpio_set_pin_direction(PA23, GPIO_DIRECTION_OUT);
-
-    // No longer supporting Metro M4 Express directly.
-
-    // gpio_set_pin_direction(PA16, GPIO_DIRECTION_OUT);
+    gpio_set_pin_direction(PA23, GPIO_DIRECTION_OUT); // D13 Feather M4
+    gpio_set_pin_direction(PA18, GPIO_DIRECTION_OUT); // D6 Feather M4
 }
 
 /*
