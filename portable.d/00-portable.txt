@@ -1,11 +1,18 @@
 
+New message: a out-of-band 'stash' (bypass git mechanism).
+
+
+
+
+Old message follows:
+
 Purpose of this 'portable' (ran out of fun words,
 this is itt)
 
 .. purpose is to preserve 'interesting' changes without
 clobbering the existing, more structured BRANCH.
 
-Intent is to create another branch with the new stuff innit.
+OLD Intent is to create another branch with the new stuff innit.
 
 Progress: interesting oscilloscope work tonight.  Still do
 not see output on the TX line (but the RX line does get
