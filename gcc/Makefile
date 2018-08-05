@@ -46,15 +46,31 @@ hpl/oscctrl \
 gcc/gcc \
 hpl/core
 
+
+
+# reference above it: hal/src/hal_io.o \
+# hpl/systick/hpl_systick.o \
+
+# hpl/oscctrl/hpl_oscctrl.o \
+# hpl/core/hpl_init.o \
+
+
+# hal/src/hal_usart_sync.o \
+# hpl/mclk/hpl_mclk.o \
+
+# led_pulse.o \
+# hpl/osc32kctrl/hpl_osc32kctrl.o \
+
+# led_pulse.o \  demonstrates that the format is 'most recent previous line, thisline' for multiple iterations
+# driver_init.o \
+
 # List the object files
 OBJS +=  \
 hal/src/hal_io.o \
-hpl/systick/hpl_systick.o \
 hpl/core/hpl_core_m4.o \
 hal/utils/src/utils_syscalls.o \
 hal/src/hal_delay.o \
 hpl/oscctrl/hpl_oscctrl.o \
-hpl/core/hpl_init.o \
 hpl/gclk/hpl_gclk.o \
 hal/utils/src/utils_list.o \
 gcc/system_samd51.o \
@@ -62,7 +78,6 @@ hal/utils/src/utils_assert.o \
 hpl/dmac/hpl_dmac.o \
 hpl/pm/hpl_pm.o \
 hal/src/hal_usart_sync.o \
-hpl/mclk/hpl_mclk.o \
 hpl/ramecc/hpl_ramecc.o \
 hal/src/hal_init.o \
 gcc/gcc/startup_samd51.o \
@@ -72,8 +87,6 @@ clock_init.o \
 gpio_local.o \
 jake_uart.o \
 led_pulse.o \
-hpl/osc32kctrl/hpl_osc32kctrl.o \
-driver_init.o \
 hpl/sercom/hpl_sercom.o \
 hal/src/hal_gpio.o \
 hal/utils/src/utils_event.o \
@@ -83,14 +96,27 @@ hal/src/hal_atomic.o
 
 # examples/driver_examples.o \
 
+# "hal/src/hal_io.o" \
+# "hpl/systick/hpl_systick.o" \
+
+# "hpl/oscctrl/hpl_oscctrl.o" \
+# "hpl/core/hpl_init.o" \
+
+# "hal/src/hal_usart_sync.o" \
+# "hpl/mclk/hpl_mclk.o" \
+
+# "led_pulse.o" \
+# "hpl/osc32kctrl/hpl_osc32kctrl.o" \
+
+# "led_pulse.o" \
+# "driver_init.o" \
+
 OBJS_AS_ARGS +=  \
 "hal/src/hal_io.o" \
-"hpl/systick/hpl_systick.o" \
 "hpl/core/hpl_core_m4.o" \
 "hal/utils/src/utils_syscalls.o" \
 "hal/src/hal_delay.o" \
 "hpl/oscctrl/hpl_oscctrl.o" \
-"hpl/core/hpl_init.o" \
 "hpl/gclk/hpl_gclk.o" \
 "hal/utils/src/utils_list.o" \
 "gcc/system_samd51.o" \
@@ -98,7 +124,6 @@ OBJS_AS_ARGS +=  \
 "hpl/dmac/hpl_dmac.o" \
 "hpl/pm/hpl_pm.o" \
 "hal/src/hal_usart_sync.o" \
-"hpl/mclk/hpl_mclk.o" \
 "hpl/ramecc/hpl_ramecc.o" \
 "hal/src/hal_init.o" \
 "gcc/gcc/startup_samd51.o" \
@@ -108,8 +133,6 @@ OBJS_AS_ARGS +=  \
 "gpio_local.o" \
 "jake_uart.o" \
 "led_pulse.o" \
-"hpl/osc32kctrl/hpl_osc32kctrl.o" \
-"driver_init.o" \
 "hpl/sercom/hpl_sercom.o" \
 "hal/src/hal_gpio.o" \
 "hal/utils/src/utils_event.o" \
@@ -122,11 +145,23 @@ OBJS_AS_ARGS +=  \
 # List the dependency files
 DEPS := $(OBJS:%.o=%.d)
 
+
+# "hpl/ramecc/hpl_ramecc.d" \
+# "hpl/systick/hpl_systick.d" \
+
+# "hal/src/hal_usart_sync.d" \
+# "hpl/mclk/hpl_mclk.d" \
+
+# "driver_init.d" \
+# "hpl/osc32kctrl/hpl_osc32kctrl.d" \
+
+# "hal/src/hal_usart_sync.d" \
+# "driver_init.d" \
+
 DEPS_AS_ARGS +=  \
 "hal/utils/src/utils_event.d" \
 "hal/src/hal_io.d" \
 "hpl/ramecc/hpl_ramecc.d" \
-"hpl/systick/hpl_systick.d" \
 "hpl/core/hpl_core_m4.d" \
 "hal/utils/src/utils_syscalls.d" \
 "gcc/system_samd51.d" \
@@ -140,9 +175,6 @@ DEPS_AS_ARGS +=  \
 "gcc/gcc/startup_samd51.d" \
 "hal/src/hal_init.d" \
 "hal/src/hal_usart_sync.d" \
-"hpl/mclk/hpl_mclk.d" \
-"driver_init.d" \
-"hpl/osc32kctrl/hpl_osc32kctrl.d" \
 "main.d" \
 "blinker.d" \
 "clock_init.d" \
@@ -199,31 +231,44 @@ $(OUTPUT_FILE_PATH): $(OBJS)
 
 
 
+# -I"../" -I"../config" -I"../examples" -I"../hal/include" -I"../hal/utils/include" -I"../hpl/core" -I"../hpl/dmac" -I"../hpl/gclk" -I"../hpl/mclk" -I"../hpl/osc32kctrl" -I"../hpl/oscctrl" -I"../hpl/pm" -I"../hpl/port" -I"../hpl/ramecc" -I"../hpl/sercom" -I"../hpl/systick" -I"../hri" -I"../" -I"../CMSIS/Include" -I"../include"  \
+# -I"../" -I"../config" -I"../examples" -I"../hal/include" -I"../hal/utils/include" -I"../hpl/core" -I"../hpl/dmac" -I"../hpl/gclk" -I"../hpl/mclk" -I"../hpl/osc32kctrl" -I"../hpl/oscctrl" -I"../hpl/pm" -I"../hpl/port" -I"../hpl/ramecc" -I"../hpl/sercom"                      -I"../hri" -I"../" -I"../CMSIS/Include" -I"../include"  \
 
 %.o: %.c
 	@echo Building file: $<
 	@echo ARM/GNU C Compiler
 	$(QUOTE)arm-none-eabi-gcc$(QUOTE) -x c -mthumb -DDEBUG -Os -ffunction-sections -mlong-calls -g3 -Wall $(CFLAGS) -c -std=gnu99 \
 -D__SAMD51J19A__ -mcpu=cortex-m4 -mfloat-abi=softfp -mfpu=fpv4-sp-d16 \
--I"../" -I"../config" -I"../examples" -I"../hal/include" -I"../hal/utils/include" -I"../hpl/core" -I"../hpl/dmac" -I"../hpl/gclk" -I"../hpl/mclk" -I"../hpl/osc32kctrl" -I"../hpl/oscctrl" -I"../hpl/pm" -I"../hpl/port" -I"../hpl/ramecc" -I"../hpl/sercom" -I"../hpl/systick" -I"../hri" -I"../" -I"../CMSIS/Include" -I"../include"  \
+-I"../" -I"../config" -I"../examples" -I"../hal/include" -I"../hal/utils/include" -I"../hpl/core" -I"../hpl/dmac" -I"../hpl/gclk" -I"../hpl/mclk"                       -I"../hpl/oscctrl" -I"../hpl/pm" -I"../hpl/port" -I"../hpl/ramecc" -I"../hpl/sercom"                      -I"../hri" -I"../" -I"../CMSIS/Include" -I"../include"  \
 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"  -o "$@" "$<"
 	@echo Finished building: $<
+
+
+
+
+# -I"../" -I"../config" -I"../examples" -I"../hal/include" -I"../hal/utils/include" -I"../hpl/core" -I"../hpl/dmac" -I"../hpl/gclk" -I"../hpl/mclk" -I"../hpl/osc32kctrl" -I"../hpl/oscctrl" -I"../hpl/pm" -I"../hpl/port" -I"../hpl/ramecc" -I"../hpl/sercom" -I"../hpl/systick" -I"../hri" -I"../" -I"../CMSIS/Include" -I"../include"  \
+# -I"../" -I"../config" -I"../examples" -I"../hal/include" -I"../hal/utils/include" -I"../hpl/core" -I"../hpl/dmac" -I"../hpl/gclk" -I"../hpl/mclk" -I"../hpl/osc32kctrl" -I"../hpl/oscctrl" -I"../hpl/pm" -I"../hpl/port" -I"../hpl/ramecc" -I"../hpl/sercom"                    -I"../hri" -I"../" -I"../CMSIS/Include" -I"../include"  \
 
 %.o: %.s
 	@echo Building file: $<
 	@echo ARM/GNU Assembler
 	$(QUOTE)arm-none-eabi-as$(QUOTE) -x c -mthumb -DDEBUG -Os -ffunction-sections -mlong-calls -g3 -Wall $(CFLAGS) -c -std=gnu99 \
 -D__SAMD51J19A__ -mcpu=cortex-m4 -mfloat-abi=softfp -mfpu=fpv4-sp-d16 \
--I"../" -I"../config" -I"../examples" -I"../hal/include" -I"../hal/utils/include" -I"../hpl/core" -I"../hpl/dmac" -I"../hpl/gclk" -I"../hpl/mclk" -I"../hpl/osc32kctrl" -I"../hpl/oscctrl" -I"../hpl/pm" -I"../hpl/port" -I"../hpl/ramecc" -I"../hpl/sercom" -I"../hpl/systick" -I"../hri" -I"../" -I"../CMSIS/Include" -I"../include"  \
+-I"../" -I"../config" -I"../examples" -I"../hal/include" -I"../hal/utils/include" -I"../hpl/core" -I"../hpl/dmac" -I"../hpl/gclk" -I"../hpl/mclk"                       -I"../hpl/oscctrl" -I"../hpl/pm" -I"../hpl/port" -I"../hpl/ramecc" -I"../hpl/sercom"                    -I"../hri" -I"../" -I"../CMSIS/Include" -I"../include"  \
 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"  -o "$@" "$<"
 	@echo Finished building: $<
+
+
+
+# -I"../" -I"../config" -I"../examples" -I"../hal/include" -I"../hal/utils/include" -I"../hpl/core" -I"../hpl/dmac" -I"../hpl/gclk" -I"../hpl/mclk" -I"../hpl/osc32kctrl" -I"../hpl/oscctrl" -I"../hpl/pm" -I"../hpl/port" -I"../hpl/ramecc" -I"../hpl/sercom" -I"../hpl/systick" -I"../hri" -I"../" -I"../CMSIS/Include" -I"../include"  \
+# -I"../" -I"../config" -I"../examples" -I"../hal/include" -I"../hal/utils/include" -I"../hpl/core" -I"../hpl/dmac" -I"../hpl/gclk" -I"../hpl/mclk" -I"../hpl/osc32kctrl" -I"../hpl/oscctrl" -I"../hpl/pm" -I"../hpl/port" -I"../hpl/ramecc" -I"../hpl/sercom"                    -I"../hri" -I"../" -I"../CMSIS/Include" -I"../include"  \
 
 %.o: %.S
 	@echo Building file: $<
 	@echo ARM/GNU Preprocessing Assembler
 	$(QUOTE)arm-none-eabi-gcc$(QUOTE) -x c -mthumb -DDEBUG -Os -ffunction-sections -mlong-calls -g3 -Wall $(CFLAGS) -c -std=gnu99 \
 -D__SAMD51J19A__ -mcpu=cortex-m4 -mfloat-abi=softfp -mfpu=fpv4-sp-d16 \
--I"../" -I"../config" -I"../examples" -I"../hal/include" -I"../hal/utils/include" -I"../hpl/core" -I"../hpl/dmac" -I"../hpl/gclk" -I"../hpl/mclk" -I"../hpl/osc32kctrl" -I"../hpl/oscctrl" -I"../hpl/pm" -I"../hpl/port" -I"../hpl/ramecc" -I"../hpl/sercom" -I"../hpl/systick" -I"../hri" -I"../" -I"../CMSIS/Include" -I"../include"  \
+-I"../" -I"../config" -I"../examples" -I"../hal/include" -I"../hal/utils/include" -I"../hpl/core" -I"../hpl/dmac" -I"../hpl/gclk" -I"../hpl/mclk"                       -I"../hpl/oscctrl" -I"../hpl/pm" -I"../hpl/port" -I"../hpl/ramecc" -I"../hpl/sercom"                    -I"../hri" -I"../" -I"../CMSIS/Include" -I"../include"  \
 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"  -o "$@" "$<"
 	@echo Finished building: $<
 
