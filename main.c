@@ -210,7 +210,16 @@ void nooop(void) {
 }
 
 void nmain(void) {
+
+
     while(1) {
+        tx_to_vcc();
+
+        // very long time between typed 'U' characters:
+        for (int j = 14799; j > 0; j--) { hold_for_tick_change(); }
+
+        // ---- new stanza
+
         tx_to_vcc();
         hold_for_tick_change();
         _one_gap();
@@ -220,8 +229,7 @@ void nmain(void) {
             if (i ==  7) { _one_gap();   }
             if (i ==  6) { _one_pulse(); }
             if (i ==  5) { _one_gap();   }
-            if (i ==  4) { _one_pulse(); }
-
+            if (i ==  4) { _one_pulse(); } 
             if (i ==  3) { _one_gap();   }
             if (i ==  2) { _one_pulse(); }
             if (i ==  1) { _one_gap();   }
@@ -231,8 +239,18 @@ void nmain(void) {
         _one_gap();
         hold_for_tick_change();
         tx_to_vcc();
-        for (int j = 99; j > 0; j--) { hold_for_tick_change(); }
+
+        // very long time between typed 'U' characters:
+        for (int j = 14899; j > 0; j--) { hold_for_tick_change(); }
+
+
+        // ---- closed, stanza
     }
+
+
+
+
+
 
 
     while(1) { // ---------- trapped -------------
@@ -260,7 +278,10 @@ int main(void) {
     // system runs at half speed so need to double-quicken it here to 26 uSec
     // SysTick_Config(5320); // 19200 baud has    52   uSec pulses
     // SysTick_Config(2660); // 19200 baud has    52   uSec pulses
-    SysTick_Config(1330); // 19200 baud has    52   uSec pulses
+
+    // 1330 is a bit too hot -- slow it a bit
+    // SysTick_Config(1330); // 19200 baud has    52   uSec pulses
+    SysTick_Config(1420); // 19200 baud has    52   uSec pulses
 
     nmain();
     while (1) {
