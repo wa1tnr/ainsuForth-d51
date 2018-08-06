@@ -195,8 +195,15 @@ void hold_for_tick_change(void) {
     }
 }
 
+
 void _one_gap(void) {
     tx_to_vcc();
+}
+
+void _two_gap(void) {
+    tx_to_vcc();
+    hold_for_tick_change();
+    hold_for_tick_change();
 }
 
 void _one_pulse(void) {
@@ -206,6 +213,33 @@ void _one_pulse(void) {
     hold_for_tick_change();
 }
 
+
+
+void send_uuu(void) {
+    tx_to_vcc();
+    hold_for_tick_change();
+    _one_gap();
+
+    for (int i =  9; i > -1 ; i--) {
+        if (i ==  9) { _one_gap();   }
+        if (i ==  8) { _one_pulse(); }
+        if (i ==  7) { _one_gap();   }
+        if (i ==  6) { _one_pulse(); }
+
+        if (i ==  5) { _one_gap();   }
+        if (i ==  4) { _one_pulse(); } 
+        if (i ==  3) { _two_gap();   }
+        if (i ==  0) { _one_pulse(); }
+        hold_for_tick_change();
+    }
+    _one_gap();
+    hold_for_tick_change();
+    tx_to_vcc();
+
+    // very long time between typed 'U' characters:
+    for (int j = 14899; j > 0; j--) { hold_for_tick_change(); }
+}
+
 void nooop(void) {
 }
 
@@ -213,6 +247,7 @@ void nmain(void) {
 
 
     while(1) {
+        send_uuu();
         tx_to_vcc();
 
         // very long time between typed 'U' characters:
