@@ -1,0 +1,16 @@
+
+      110 baud has   3.5 millisecond pulses (as seen on teh oscilloscope).
+
+      300 baud has   3.5 millisecond pulses as well.
+
+     1200 baud has   850   uSec pulses
+     2400 baud has   429   uSec pulses
+     4800 baud has   210   uSec pulses
+     9600 baud has   105   uSec pulses
+    19200 baud has    52   uSec pulses
+    38400 baud has    27   uSec pulses
+
+    57600 baud has    17.5 uSec pulses
+   115200 baud has     8.6 usec pulses
+
+
