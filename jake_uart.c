@@ -109,19 +109,22 @@ void jake_uart(void) { // main()
     interrupts_setup();
 
 #undef J_ENDLESS
+#define J_ENDLESS
 
 #ifdef J_ENDLESS
     while (1) {
         while(!SERCOM5->USART.INTFLAG.bit.DRE);
         // SERCOM5->USART.DATA.reg   = (uint8_t)170; // presume this means send this byte out the port
-        SERCOM5->USART.DATA.reg   = (uint16_t)0xa5; // was uint8_t in upstream but Arduino says 16_t here
+        // SERCOM5->USART.DATA.reg   = (uint16_t)0xa5; // was uint8_t in upstream but Arduino says 16_t here
+        SERCOM5->USART.DATA.reg   = (uint8_t)0xa5;
 
-        while(!SERCOM5->USART.INTFLAG.bit.TXC); // flush // not in jake's code
+        // while(!SERCOM5->USART.INTFLAG.bit.TXC); // flush // not in jake's code
 
         // give debug hardware signals to human developer with oscope or human vision
 
         // pulse width here is 20 uSec:
-#undef SEEN_FIVE_KHZ
+#undef  SEEN_FIVE_KHZ
+#define SEEN_FIVE_KHZ
 #ifdef SEEN_FIVE_KHZ
         PORT->Group[0].OUTTGL.reg = (uint32_t)(1 << 18); // blink  D6 / PA18
         PORT->Group[0].OUTTGL.reg = (uint32_t)(1 << 23); // blink D13 / PA23
