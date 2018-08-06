@@ -126,17 +126,114 @@ void clock_init(void){ // Jake Read
     MCLK->CPUDIV.reg = MCLK_CPUDIV_DIV_DIV1;
 }
 
-void nmain(void) {
-        raise_LED_pins();
-	while (1) {
-            flicker_LED();
-            short_timer();
-	}
-}
+int tick_h  = -1; // true
+int tick_ch = -1; // true
 
 void SysTick_Handler(void){
+    int tick_v = tick_h;
+
+    if (tick_v == -1) {
+        tick_h = 0;
+    } else {
+        tick_h = -1;
+    }
+/*
     PORT->Group[0].OUTTGL.reg = (uint32_t)(1 << 18); // D6 toggle
     PORT->Group[0].OUTTGL.reg = (uint32_t)(1 << 23); // D13 toggle
+*/
+
+}
+
+void say_a_tick(void) {
+    if (tick_h == -1) {
+        // gpio lower pin to Ground
+        PORT->Group[0].OUTCLR.reg =  (uint32_t)(1 << 18); // PA18 //  0 18 pinwrite
+        PORT->Group[0].OUTCLR.reg =  (uint32_t)(1 << 23); // PA23 //  0 23 pinwrite
+    } else {
+        // gpio raise pin to 3.3v
+        PORT->Group[0].OUTSET.reg |= (uint32_t)(1 << 18); // PA18 //  1 18 pinwrite
+        PORT->Group[0].OUTSET.reg |= (uint32_t)(1 << 23); // PA23 //  1 23 pinwrite
+    }
+}
+
+int tick_r, tick_c = -1;
+
+void _ch_delay(void) {
+    // for(int i=2400; i>0; i--) {
+    for(int i=9600; i>0; i--) {
+        uSec();
+    }
+}
+
+bool tick_changed(void) {
+    tick_r = tick_h;
+    _ch_delay(); // wait a bit
+    tick_c = tick_h;
+    if (tick_c == tick_r) { // nothing's changed
+    } else {
+        return true; // escape
+    }
+    return true;
+}
+
+void hold_for_tick_change(void) {
+    bool result = true;
+    bool interim = false;
+    while (result) {
+        interim = tick_changed(); // false becomes true when changed
+        result = ! interim;
+    }
+}
+
+void deep_quiet(void) {
+    for (int i=50;i>0;i--) {
+        hold_for_tick_change();
+    }
+}
+
+void _one_pulse(void) {
+    say_a_tick();
+    deep_quiet();
+    deep_quiet();
+}
+
+void nooop(void) {
+}
+
+void nmain(void) {
+    // while(1) { say_a_tick(); }
+    while(1)    { _one_pulse(); }
+        // hold_for_tick_change();
+
+    while(1) { }
+    while(1) {
+        for (int i = 8; i > 0 ; i--) {
+            if (i == 8) { nooop(); }
+/*
+            if (i == 6) { _one_pulse(); }
+*/
+        }
+        for (int j = 12; j > 0; j--) { hold_for_tick_change(); }
+    }
+
+/*
+    while(1) {
+        hold_for_tick_change();
+        say_a_tick();
+    }
+*/
+    while(1) {
+    }
+
+    while(1) {
+        // _one_pulse();
+    }
+
+    raise_LED_pins();
+    while (1) {
+        flicker_LED();
+        short_timer();
+    }
 }
 
 int main(void) {
@@ -144,7 +241,10 @@ int main(void) {
     // init_act_LED();
     pins_setup();
     clock_init();
-    SysTick_Config(4000);
+    // SysTick_Config(5500); // 19200 baud has    52   uSec pulses
+
+    SysTick_Config(5000000); // 19200 baud has    52   uSec pulses
+
     nmain();
     while (1) {
         // none
