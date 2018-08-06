@@ -27,6 +27,7 @@ endif
 SUB_DIRS +=  \
  \
 hpl/pm \
+src \
 gcc \
 hpl/osc32kctrl \
 hpl/ramecc \
@@ -65,6 +66,8 @@ gcc/gcc/startup_samd51.o \
 main.o \
 gpio_local.o \
 usart.o \
+src/caution_lamp.o \
+src/blink_lab.o \
 hpl/osc32kctrl/hpl_osc32kctrl.o \
 examples/driver_examples.o \
 driver_init.o \
@@ -97,6 +100,8 @@ OBJS_AS_ARGS +=  \
 "main.o" \
 "gpio_local.o" \
 "usart.o" \
+"src/caution_lamp.o" \
+"src/blink_lab.o" \
 "hpl/osc32kctrl/hpl_osc32kctrl.o" \
 "examples/driver_examples.o" \
 "driver_init.o" \
@@ -134,6 +139,8 @@ DEPS_AS_ARGS +=  \
 "main.d" \
 "gpio_local.d" \
 "usart.d" \
+"src/caution_lamp.d" \
+"src/blink_lab.d" \
 "examples/driver_examples.d" \
 "hal/src/hal_sleep.d" \
 "hpl/sercom/hpl_sercom.d" \
@@ -222,6 +229,7 @@ $(SUB_DIRS):
 	$(MK_DIR) "$@"
 
 arc:
+	# running target 'make arc' now
 	cp   ./AtmelStart.bin    _stored/AtmelStart.bin
 	cp   ./AtmelStart.eep    _stored/AtmelStart.eep
 	cp   ./AtmelStart.elf    _stored/AtmelStart.elf
@@ -232,6 +240,16 @@ arc:
 # git checkout -- AtmelStart.bin
 
 checkout:
+	# running target 'make checkout' now
+	@git    checkout    --     _stored/AtmelStart.bin
+	@git    checkout    --     _stored/AtmelStart.elf
+	@git    checkout    --     _stored/AtmelStart.hex
+	@git    checkout    --     _stored/AtmelStart.lss
+	@git    checkout    --     _stored/AtmelStart.map
+
+# does not exist in this branch:
+checkout2:
+	# ERROR - does not exist in this one branch.  was: running target 'make checkou2' now
 	@git    checkout    --     AtmelStart.bin
 	@git    checkout    --     AtmelStart.elf
 	@git    checkout    --     AtmelStart.hex
@@ -240,9 +258,14 @@ checkout:
 
 #       @git    checkout    --     AtmelStart.eep
 
-install: arc checkout
+# install: arc checkout
+install: arc
+	# running target 'make install' now
 	./scripts/_bossac_local.sh ./AtmelStart.bin
+	# use 'make checkout' to tell git no changes to AtmelStart.*
 
+# for clean target:
+# rm -f ./_stored/AtmelStart.???
 
 clean:
 	rm -f $(OBJS_AS_ARGS)
