@@ -146,22 +146,29 @@ void SysTick_Handler(void){
 
 }
 
-void say_a_tick(void) {
-    if (tick_h == -1) {
+void tx_to_ground(void) {
         // gpio lower pin to Ground
         PORT->Group[0].OUTCLR.reg =  (uint32_t)(1 << 18); // PA18 //  0 18 pinwrite
         PORT->Group[0].OUTCLR.reg =  (uint32_t)(1 << 23); // PA23 //  0 23 pinwrite
+}
+
+void tx_to_vcc(void) {
+    // gpio raise pin to 3.3v
+    PORT->Group[0].OUTSET.reg |= (uint32_t)(1 << 18); // PA18 //  1 18 pinwrite
+    PORT->Group[0].OUTSET.reg |= (uint32_t)(1 << 23); // PA23 //  1 23 pinwrite
+}
+
+void say_a_tick(void) {
+    if (tick_h == -1) {
+        tx_to_ground();
     } else {
-        // gpio raise pin to 3.3v
-        PORT->Group[0].OUTSET.reg |= (uint32_t)(1 << 18); // PA18 //  1 18 pinwrite
-        PORT->Group[0].OUTSET.reg |= (uint32_t)(1 << 23); // PA23 //  1 23 pinwrite
+        tx_to_vcc();
     }
 }
 
 
 void _ch_delay(void) {
-    // for(int i=2400; i>0; i--) {
-    for(int i=4; i>0; i--) {
+    for(int i=2; i>0; i--) {
         uSec();
     }
 }
@@ -192,49 +199,55 @@ void deep_quiet(void) {
     }
 }
 
+void _one_gap(void) {
+    tx_to_vcc();
+}
+
 void _one_pulse(void) {
     say_a_tick();
     hold_for_tick_change(); // must be an odd number of occurances
     say_a_tick();
-    // deep_quiet(); // 3x hold_for_tick_change();
-    // hold_for_tick_change(); // must be an odd number of occurances
+    hold_for_tick_change();
 }
 
 void nooop(void) {
 }
 
 void nmain(void) {
-
-    // while(1) { say_a_tick(); }
-
-    // while(1)    { _one_pulse(); }
-
-        // hold_for_tick_change();
-
-    // while(1) { }
     while(1) {
-        for (int i = 8; i > 0 ; i--) {
-            hold_for_tick_change();
-            hold_for_tick_change();
-            hold_for_tick_change();
-            if (i == 8) { nooop(); }
-            if (i == 6) { _one_pulse(); }
-            if (i == 2) { _one_pulse(); }
-        }
-        for (int j = 9; j > 0; j--) { hold_for_tick_change(); }
-    }
-
-/*
-    while(1) {
+        tx_to_vcc();
         hold_for_tick_change();
-        say_a_tick();
-    }
-*/
-    while(1) {
-    }
+        _one_gap();
+        for (int i = 15; i > -1 ; i--) {
+            // hold_for_tick_change();
 
-    while(1) {
-        // _one_pulse();
+            if (i == 15) { _one_gap();   }
+            if (i == 14) { _one_pulse(); }
+            if (i == 13) { _one_gap();   }
+            if (i == 12) { _one_pulse(); }
+
+            if (i == 11) { _one_gap();   }
+            if (i == 10) { _one_pulse(); }
+            if (i ==  9) { _one_gap();   }
+            if (i ==  8) { _one_pulse(); }
+
+            if (i ==  7) { _one_gap();   }
+            if (i ==  6) { _one_pulse(); }
+            if (i ==  5) { _one_gap();   }
+            if (i ==  4) { _one_pulse(); }
+
+            if (i ==  3) { _one_gap();   }
+            if (i ==  2) { _one_pulse(); }
+            if (i ==  1) { _one_gap();   }
+            if (i ==  0) { _one_pulse(); }
+            hold_for_tick_change();
+        }
+        _one_gap();
+        hold_for_tick_change();
+        tx_to_vcc();
+        for (int j = 99; j > 0; j--) { hold_for_tick_change(); }
+    }
+    while(1) { // ---------- trapped -------------
     }
 
     raise_LED_pins();
