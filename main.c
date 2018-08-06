@@ -1,5 +1,8 @@
 // Mon Aug  6 06:11:27 UTC 2018
 
+// Working serial program - sends a string of UUUUUU to the
+// serial terminal running at 38400 bps
+
 // main.c
 
 #include "atmel_start.h"
@@ -130,7 +133,6 @@ void clock_init(void){ // Jake Read
     MCLK->CPUDIV.reg = MCLK_CPUDIV_DIV_DIV1;
 }
 
-
 void SysTick_Handler(void){
     int tick_v = tick_h;
 
@@ -139,23 +141,24 @@ void SysTick_Handler(void){
     } else {
         tick_h = -1;
     }
-/*
-    PORT->Group[0].OUTTGL.reg = (uint32_t)(1 << 18); // D6 toggle
-    PORT->Group[0].OUTTGL.reg = (uint32_t)(1 << 23); // D13 toggle
-*/
-
 }
 
 void tx_to_ground(void) {
-        // gpio lower pin to Ground
-        PORT->Group[0].OUTCLR.reg =  (uint32_t)(1 << 18); // PA18 //  0 18 pinwrite
-        PORT->Group[0].OUTCLR.reg =  (uint32_t)(1 << 23); // PA23 //  0 23 pinwrite
+    // gpio lower pin to Ground
+    PORT->Group[0].OUTCLR.reg =  (uint32_t)(1 << 18); // PA18 //  0 18 pinwrite
+    PORT->Group[0].OUTCLR.reg =  (uint32_t)(1 << 23); // PA23 //  0 23 pinwrite
+
+    // Serial TX echo:
+    PORT->Group[1].OUTCLR.reg =  (uint32_t)(1 << 16); // PB16 //  0 16 pinwrite
 }
 
 void tx_to_vcc(void) {
     // gpio raise pin to 3.3v
     PORT->Group[0].OUTSET.reg |= (uint32_t)(1 << 18); // PA18 //  1 18 pinwrite
     PORT->Group[0].OUTSET.reg |= (uint32_t)(1 << 23); // PA23 //  1 23 pinwrite
+
+    // Serial TX echo:
+    PORT->Group[1].OUTSET.reg |= (uint32_t)(1 << 16); // PB16 //  1 16 pinwrite
 }
 
 void say_a_tick(void) {
@@ -165,7 +168,6 @@ void say_a_tick(void) {
         tx_to_vcc();
     }
 }
-
 
 void _ch_delay(void) {
     for(int i=2; i>0; i--) {
@@ -193,19 +195,13 @@ void hold_for_tick_change(void) {
     }
 }
 
-void deep_quiet(void) {
-    for (int i=3;i>0;i--) {
-        hold_for_tick_change();
-    }
-}
-
 void _one_gap(void) {
     tx_to_vcc();
 }
 
 void _one_pulse(void) {
     say_a_tick();
-    hold_for_tick_change(); // must be an odd number of occurances
+    hold_for_tick_change();
     say_a_tick();
     hold_for_tick_change();
 }
@@ -218,19 +214,9 @@ void nmain(void) {
         tx_to_vcc();
         hold_for_tick_change();
         _one_gap();
-        for (int i = 15; i > -1 ; i--) {
-            // hold_for_tick_change();
-
-            if (i == 15) { _one_gap();   }
-            if (i == 14) { _one_pulse(); }
-            if (i == 13) { _one_gap();   }
-            if (i == 12) { _one_pulse(); }
-
-            if (i == 11) { _one_gap();   }
-            if (i == 10) { _one_pulse(); }
+        for (int i =  9; i > -1 ; i--) {
             if (i ==  9) { _one_gap();   }
             if (i ==  8) { _one_pulse(); }
-
             if (i ==  7) { _one_gap();   }
             if (i ==  6) { _one_pulse(); }
             if (i ==  5) { _one_gap();   }
@@ -247,6 +233,8 @@ void nmain(void) {
         tx_to_vcc();
         for (int j = 99; j > 0; j--) { hold_for_tick_change(); }
     }
+
+
     while(1) { // ---------- trapped -------------
     }
 
@@ -271,7 +259,8 @@ int main(void) {
 
     // system runs at half speed so need to double-quicken it here to 26 uSec
     // SysTick_Config(5320); // 19200 baud has    52   uSec pulses
-    SysTick_Config(2660); // 19200 baud has    52   uSec pulses
+    // SysTick_Config(2660); // 19200 baud has    52   uSec pulses
+    SysTick_Config(1330); // 19200 baud has    52   uSec pulses
 
     nmain();
     while (1) {
