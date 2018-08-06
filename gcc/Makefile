@@ -44,13 +44,17 @@ hpl/core
 
 
 
-# usart.o \
+
+# hal/src/hal_io.o \
+# hpl/systick/hpl_systick.o \
+# hpl/core/hpl_core_m4.o \
+# hpl/dmac/hpl_dmac.o \
+# hpl/pm/hpl_pm.o \
+# hpl/ramecc/hpl_ramecc.o \
+# hal/src/hal_usart_sync.o \
 
 # List the object files
 OBJS +=  \
-hal/src/hal_io.o \
-hpl/systick/hpl_systick.o \
-hpl/core/hpl_core_m4.o \
 hal/utils/src/utils_syscalls.o \
 hal/src/hal_delay.o \
 hpl/oscctrl/hpl_oscctrl.o \
@@ -59,11 +63,7 @@ hpl/gclk/hpl_gclk.o \
 hal/utils/src/utils_list.o \
 gcc/system_samd51.o \
 hal/utils/src/utils_assert.o \
-hpl/dmac/hpl_dmac.o \
-hpl/pm/hpl_pm.o \
-hal/src/hal_usart_sync.o \
 hpl/mclk/hpl_mclk.o \
-hpl/ramecc/hpl_ramecc.o \
 hal/src/hal_init.o \
 gcc/gcc/startup_samd51.o \
 main.o \
@@ -80,12 +80,15 @@ hal/src/hal_atomic.o
 
 
 
-# "usart.o" \
+# "hal/src/hal_io.o" \
+# "hpl/systick/hpl_systick.o" \
+# "hpl/core/hpl_core_m4.o" \
+# "hpl/dmac/hpl_dmac.o" \
+# "hpl/pm/hpl_pm.o" \
+# "hpl/ramecc/hpl_ramecc.o" \
+# "hal/src/hal_usart_sync.o" \
 
 OBJS_AS_ARGS +=  \
-"hal/src/hal_io.o" \
-"hpl/systick/hpl_systick.o" \
-"hpl/core/hpl_core_m4.o" \
 "hal/utils/src/utils_syscalls.o" \
 "hal/src/hal_delay.o" \
 "hpl/oscctrl/hpl_oscctrl.o" \
@@ -94,11 +97,7 @@ OBJS_AS_ARGS +=  \
 "hal/utils/src/utils_list.o" \
 "gcc/system_samd51.o" \
 "hal/utils/src/utils_assert.o" \
-"hpl/dmac/hpl_dmac.o" \
-"hpl/pm/hpl_pm.o" \
-"hal/src/hal_usart_sync.o" \
 "hpl/mclk/hpl_mclk.o" \
-"hpl/ramecc/hpl_ramecc.o" \
 "hal/src/hal_init.o" \
 "gcc/gcc/startup_samd51.o" \
 "main.o" \
@@ -118,26 +117,25 @@ DEPS := $(OBJS:%.o=%.d)
 
 
 
-# "usart.d" \
+# "hal/src/hal_io.d" \
+# "hpl/systick/hpl_systick.d" \
+# "hpl/core/hpl_core_m4.d" \
+# "hpl/dmac/hpl_dmac.d" \
+# "hpl/pm/hpl_pm.d" \
+# "hpl/ramecc/hpl_ramecc.d" \
+# "hal/src/hal_usart_sync.d" \
 
 DEPS_AS_ARGS +=  \
 "hal/utils/src/utils_event.d" \
-"hal/src/hal_io.d" \
-"hpl/ramecc/hpl_ramecc.d" \
-"hpl/systick/hpl_systick.d" \
-"hpl/core/hpl_core_m4.d" \
 "hal/utils/src/utils_syscalls.d" \
 "gcc/system_samd51.d" \
 "hal/utils/src/utils_list.d" \
-"hpl/dmac/hpl_dmac.d" \
 "hal/utils/src/utils_assert.d" \
 "hal/src/hal_delay.d" \
 "hpl/core/hpl_init.d" \
-"hpl/pm/hpl_pm.d" \
 "hpl/gclk/hpl_gclk.d" \
 "gcc/gcc/startup_samd51.d" \
 "hal/src/hal_init.d" \
-"hal/src/hal_usart_sync.d" \
 "hpl/mclk/hpl_mclk.d" \
 "driver_init.d" \
 "hpl/osc32kctrl/hpl_osc32kctrl.d" \
