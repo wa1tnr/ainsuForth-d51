@@ -4,9 +4,36 @@
 
 #include "atmel_start.h"
 #include "gpio_local.h"
-// #include "usart.h"
-// #include "uartport.h"
-// #include "hardware.h"
+
+void pins_setup(void) {
+
+    // serial pins
+    //    input
+    PORT->Group[1].DIRCLR.reg = (uint32_t)(1 << 17); // rx is input // PB17
+    //    output
+    PORT->Group[1].DIRSET.reg = (uint32_t)(1 << 16); // tx output   // PB16
+
+    // gpio outputs
+    PORT->Group[0].DIRSET.reg |= (uint32_t)(1 << 18); // PA18 //  1 18 pinmode  // D6
+    PORT->Group[0].DIRSET.reg |= (uint32_t)(1 << 23); // PA23 //  1 23 pinmode  // D13
+
+    // gpio raise pin to 3.3v
+    PORT->Group[0].OUTSET.reg |= (uint32_t)(1 << 18); // PA18 //  1 18 pinwrite
+    PORT->Group[0].OUTSET.reg |= (uint32_t)(1 << 23); // PA23 //  1 23 pinwrite
+
+    // gpio lower pin to Ground
+    PORT->Group[0].OUTCLR.reg =  (uint32_t)(1 << 18); // PA18 //  0 18 pinwrite
+    PORT->Group[0].OUTCLR.reg =  (uint32_t)(1 << 23); // PA23 //  0 23 pinwrite
+
+    // gpio input pins
+    PORT->Group[0].DIRCLR.reg  = (uint32_t)(1 << 21); // PA21 //  0 21 pinmode  // D11
+
+    // gpio output pin toggles
+    PORT->Group[0].OUTTGL.reg = (uint32_t)(1 << 18); // D6 toggle
+    PORT->Group[0].OUTTGL.reg = (uint32_t)(1 << 23); // D13 toggle
+}
+
+
 
 void uSec(void) {
     for (volatile int i = 1; i < 2; i++) { // needs calibration
@@ -107,13 +134,17 @@ void nmain(void) {
 	}
 }
 
+void SysTick_Handler(void){
+    PORT->Group[0].OUTTGL.reg = (uint32_t)(1 << 18); // D6 toggle
+    PORT->Group[0].OUTTGL.reg = (uint32_t)(1 << 23); // D13 toggle
+}
+
 int main(void) {
     SystemInit();
-
+    // init_act_LED();
+    pins_setup();
     clock_init();
-    // SysTick_Config(4000000);
-
-    init_act_LED();
+    SysTick_Config(4000);
     nmain();
     while (1) {
         // none
