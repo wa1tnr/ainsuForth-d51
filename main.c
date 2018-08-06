@@ -5,6 +5,10 @@
 #include "atmel_start.h"
 #include "gpio_local.h"
 
+int tick_h  = -1; // true
+int tick_ch = -1; // true
+int tick_r, tick_c = -1;
+
 void pins_setup(void) {
 
     // serial pins
@@ -126,8 +130,6 @@ void clock_init(void){ // Jake Read
     MCLK->CPUDIV.reg = MCLK_CPUDIV_DIV_DIV1;
 }
 
-int tick_h  = -1; // true
-int tick_ch = -1; // true
 
 void SysTick_Handler(void){
     int tick_v = tick_h;
@@ -156,64 +158,70 @@ void say_a_tick(void) {
     }
 }
 
-int tick_r, tick_c = -1;
 
 void _ch_delay(void) {
     // for(int i=2400; i>0; i--) {
-    for(int i=9600; i>0; i--) {
+    for(int i=4; i>0; i--) {
         uSec();
     }
 }
 
 bool tick_changed(void) {
-    tick_r = tick_h;
-    _ch_delay(); // wait a bit
-    tick_c = tick_h;
     if (tick_c == tick_r) { // nothing's changed
+        return false;
     } else {
         return true; // escape
     }
-    return true;
 }
 
 void hold_for_tick_change(void) {
     bool result = true;
     bool interim = false;
+    tick_r = tick_h;
     while (result) {
+        tick_c = tick_h;
         interim = tick_changed(); // false becomes true when changed
+        _ch_delay();
         result = ! interim;
     }
 }
 
 void deep_quiet(void) {
-    for (int i=50;i>0;i--) {
+    for (int i=3;i>0;i--) {
         hold_for_tick_change();
     }
 }
 
 void _one_pulse(void) {
     say_a_tick();
-    deep_quiet();
-    deep_quiet();
+    hold_for_tick_change(); // must be an odd number of occurances
+    say_a_tick();
+    // deep_quiet(); // 3x hold_for_tick_change();
+    // hold_for_tick_change(); // must be an odd number of occurances
 }
 
 void nooop(void) {
 }
 
 void nmain(void) {
+
     // while(1) { say_a_tick(); }
-    while(1)    { _one_pulse(); }
+
+    // while(1)    { _one_pulse(); }
+
         // hold_for_tick_change();
 
-    while(1) { }
+    // while(1) { }
     while(1) {
         for (int i = 8; i > 0 ; i--) {
+            hold_for_tick_change();
+            hold_for_tick_change();
+            hold_for_tick_change();
             if (i == 8) { nooop(); }
-/*
             if (i == 6) { _one_pulse(); }
-*/
+            if (i == 2) { _one_pulse(); }
         }
-        for (int j = 12; j > 0; j--) { hold_for_tick_change(); }
+        for (int j = 9; j > 0; j--) { hold_for_tick_change(); }
     }
 
 /*
@@ -243,7 +251,14 @@ int main(void) {
     clock_init();
     // SysTick_Config(5500); // 19200 baud has    52   uSec pulses
 
-    SysTick_Config(5000000); // 19200 baud has    52   uSec pulses
+
+    // smaller SysTick means ticks come more rapidly
+
+    // To make pulses much wider, increase SysTick tenfold
+
+    // system runs at half speed so need to double-quicken it here to 26 uSec
+    // SysTick_Config(5320); // 19200 baud has    52   uSec pulses
+    SysTick_Config(2660); // 19200 baud has    52   uSec pulses
 
     nmain();
     while (1) {
