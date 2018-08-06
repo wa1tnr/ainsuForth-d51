@@ -29,11 +29,18 @@
 
 #define D4 GPIO(GPIO_PORTA, 14)
 #define PA16 GPIO(GPIO_PORTA, 16) // on foreign target Metro M4 Express this is D13 - we are Feather M4 Express
-#define D6 GPIO(GPIO_PORTA, 18)
-#define D9 GPIO(GPIO_PORTA, 19)
-#define D11 GPIO(GPIO_PORTA, 21)
+
+#define D6   GPIO(GPIO_PORTA, 18) // alias PA18
+#define PA18 GPIO(GPIO_PORTA, 18) // alias D6
+
+#define D9   GPIO(GPIO_PORTA, 19)
+
+#define D11  GPIO(GPIO_PORTA, 21) // alias PA21
+#define PA21 GPIO(GPIO_PORTA, 21) // alias D11
+
+#define D13  GPIO(GPIO_PORTA, 23) // alias PA23
 #define PA23 GPIO(GPIO_PORTA, 23) // alias D13
-#define D13 GPIO(GPIO_PORTA, 23) // alias PA23
+
 #define PB03 GPIO(GPIO_PORTB, 3)
 #define PB16 GPIO(GPIO_PORTB, 16)
 #define PB17 GPIO(GPIO_PORTB, 17)
