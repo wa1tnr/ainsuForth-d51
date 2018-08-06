@@ -1,0 +1,21 @@
+Mon Aug  6 13:33:37 UTC 2018
+
+Working serial program.
+
+Sends 'UUUUU' (forever) out PB16 (TX Feather M4 Express).
+
+U is special: it's bit pattern is alternating 1's and 0's.
+
+Lower case 'u' is similar with one bit changed.
+
+UUU is a good test case as it only asks the programmer
+to alternate the voltage levels at a fixed speed, and
+to count them, and to shut off the alternating pattern
+when it is complete.
+
+With UUUU on the oscope, that means there's five pulses
+embracing four gaps (hard to describe).  Pulses are
+referenced at 3.3V, going to ground, so there's five
+lower levels, four upper levels between them, and
+upper levels surrounding both (leading and trailing
+in much longer time intervals).
