@@ -1,0 +1,1 @@
+https://www.avrfreaks.net/forum/no-asf-samd21-sercom-usart-rxc-interrupt-not-triggering
