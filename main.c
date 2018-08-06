@@ -35,9 +35,9 @@ int main(void) {
         short_timer();
     }
 
-    while(-1) {
-        led_pulse();
-    }
+    // while(-1) { led_pulse(); }
+
+    while(-1); // trap and do nothing interesting
 
 #ifdef NN_ENDLESS
     while (1) {
