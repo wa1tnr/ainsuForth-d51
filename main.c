@@ -1,21 +1,10 @@
-// Tue Aug  7 07:19:45 UTC 2018
-// has 5555
+// Tue Aug  7 10:05:26 UTC 2018
+// main.c
 
-// Tue Aug  7 06:43:03 UTC 2018
-// has right curly brace
-
-// Tue Aug  7 05:54:23 UTC 2018
-// has mmmm
-
-// Tue Aug  7 01:17:10 UTC 2018
-// last good
-
-// Mon Aug  6 06:11:27 UTC 2018
+// puzzling lock into first called function
 
 // Working serial program - sends a string of UUUUUU to the
 // serial terminal running at 38400 bps
-
-// main.c
 
 #include "atmel_start.h"
 #include "gpio_local.h"
@@ -309,21 +298,25 @@ void send_uuu(void) {
     _one_gap();
     hold_for_tick_change();
     tx_to_vcc();
-
-    // very long time between typed 'U' characters:
-    for (int j = 14899; j > 0; j--) { hold_for_tick_change(); }
 }
 
 
-void send_five(void) {
-    tx_to_vcc();
+void scope_pulse(void) {
     for (int j =  11; j > 0; j--) { hold_for_tick_change(); }
     pulse_D11(); // scope trigger
     for (int j =   2; j > 0; j--) { hold_for_tick_change(); }
+}
 
+void send_preamble(void) {
+    tx_to_vcc();
+    scope_pulse();
     tx_to_vcc();
     hold_for_tick_change();
     _one_gap();
+}
+
+void send_five(void) {
+    send_preamble();
     for (int i =  9; i > -1 ; i--) {
         if (i ==  9) { _one_gap();   }
         if (i ==  8) { _one_pulse(); }
@@ -356,7 +349,7 @@ void send_right_curly_brace(void) {
     tx_to_vcc();
     // very long time between typed ' ' characters:
 
-    for (int j =  7899; j > 0; j--) { hold_for_tick_change(); }
+    for (int j =  11; j > 0; j--) { hold_for_tick_change(); }
     pulse_D11(); // scope trigger
     for (int j =   2; j > 0; j--) { hold_for_tick_change(); }
 
@@ -387,23 +380,15 @@ void send_right_curly_brace(void) {
     _one_gap();
     hold_for_tick_change();
     tx_to_vcc();
-
-    // very long time between typed 'U' characters:
-    // for (int j =  7899; j > 0; j--) { hold_for_tick_change(); }
-    // pulse_D11(); // scope trigger
-    // for (int j =  7899; j > 0; j--) { hold_for_tick_change(); }
 }
 
 
 void send_m_m_m(void) {
     tx_to_vcc();
-    // very long time between typed ' ' characters:
 
-    for (int j =  7899; j > 0; j--) { hold_for_tick_change(); }
+    for (int j =  11; j > 0; j--) { hold_for_tick_change(); }
     pulse_D11(); // scope trigger
     for (int j =   2; j > 0; j--) { hold_for_tick_change(); }
-
-    // ---- new stanza
 
     tx_to_vcc();
     hold_for_tick_change();
@@ -425,25 +410,10 @@ void send_m_m_m(void) {
     _one_gap();
     hold_for_tick_change();
     tx_to_vcc();
-
-    // very long time between typed 'U' characters:
-    // for (int j =  7899; j > 0; j--) { hold_for_tick_change(); }
-    // pulse_D11(); // scope trigger
-    // for (int j =  7899; j > 0; j--) { hold_for_tick_change(); }
 }
 
-
-
 void send_UUUU(void) {
-    tx_to_vcc();
-
-    for (int j =  11; j > 0; j--) { hold_for_tick_change(); }
-    pulse_D11(); // scope trigger
-    for (int j =   2; j > 0; j--) { hold_for_tick_change(); }
-
-    tx_to_vcc();
-    hold_for_tick_change();
-    _one_gap();
+    send_preamble();
     for (int i =  9; i > -1 ; i--) {
         if (i ==  9) { _one_gap();   }
         if (i ==  8) { _one_pulse(); }
@@ -469,19 +439,19 @@ void nooop(void) {
 
 void nmain(void) {
 
-    // while(1) {
 
     for (int i=555555; i>0; i--) {
-        // send_five(); //  5555
-        /// send_m_m_m(); // send_mmmm    lower-case em
+
+        // puzzling lock into first called function
+        
+        // The first one wins - not sure what happens with the second function:
+
         send_UUUU();
+        send_five(); //  5555 not nearly as fast as sending UUUU
+
+        // send_m_m_m(); // send_mmmm    lower-case em
         // send_uuu();
     }
-
-        // send_right_curly_brace();
-        // send_m_m_m(); // send_mmmm    lower-case em
-// void send_uuu(void) {
-
 
 
     while(1) { // ---------- trapped -------------
@@ -500,41 +470,13 @@ int main(void) {
     pins_setup();
     PORT->Group[0].DIRSET.reg  = (uint32_t)(1 << 21); // PA21 //  1 11 pinmode  // D11
     clock_init();
-    // SysTick_Config(5500); // 19200 baud has    52   uSec pulses
-
-
     // smaller SysTick means ticks come more rapidly
 
-    // To make pulses much wider, increase SysTick tenfold
-
-    // system runs at half speed so need to double-quicken it here to 26 uSec
-    // SysTick_Config(5320); // 19200 baud has    52   uSec pulses
-    // SysTick_Config(2660); // 19200 baud has    52   uSec pulses
-
-    // 1330 is a bit too hot -- slow it a bit
-    // SysTick_Config(1330); // 19200 baud has    52   uSec pulses
-    int tick_rate = 1390; // 1390 is very fast for 38400
-    // tick_rate = 710;
-    // tick_rate = 355;
-    // tick_rate = 1420;
-
-
-    // tick_rate = 1400;  // it's a delay, a lower value means a shorter delay
-    // tick_rate = 1500;  // it's a delay, a lower value means a shorter delay
-    // 1400 may be too fast but 1500 is too slow and produces a nice 'j' once in a while
-    // 1470 gave an occasional U and a Capital O once in a while
-    // 1440 generates the usual close but not perfect pattern
-    // 1448 had few errors but enough to want to pursue
-// ###bookmark
-    //  1368 1368 1368  -- thirteen sixty eight had NO ERRORS in very long runs.
-    // tick_rate = 1368;  // it's a delay, a lower value means a shorter delay
+    int tick_rate = 1358; 
     tick_rate = 1358;  // it's a delay, a lower value means a shorter delay
     push(tick_rate);
-    // SysTick_Config(1420); // 19200 baud has    52   uSec pulses
-    SysTick_Config(tick_rate); // 19200 baud has    52   uSec pulses
-
+    SysTick_Config(pop());
     nmain();
     while (1) {
-        // none
     }
 }
