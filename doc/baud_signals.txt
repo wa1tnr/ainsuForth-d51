@@ -1,3 +1,12 @@
+scope trigger: pin D11 (PA21)
+
+  PORT->Group[0].DIRCLR.reg  = (uint32_t)(1 << 21); // PA21 //  0 21 pinmode  // D11
+
+  means 'direction clear' or 'direction zero' and direction means input or output mode
+
+  in forth:  0 11 pinmode  // the 11 means D11 in arduino-based Forth
+                           // Tue Aug  7 01:17:10 UTC 2018
+                           // first correct use '11' for 'D11' - edit elsewhere to conform
 
       110 baud has   3.5 millisecond pulses (as seen on teh oscilloscope).
 
@@ -14,3 +23,15 @@
    115200 baud has     8.6 usec pulses
 
 
+   The binary patterns on the scope have left and right swapped,
+   with the least significant bits to the left and MSB to the
+   right.
+
+   The 'u' vs 'U' pattern shift shows this (0x55 vs 0x75).
+
+   111 0101   0x75
+   101 0101   0x55 (read as one million, ten thousand, one hundred and one in decimal)
+
+   Space (0x20) is 100 0000 in binary (read as 'one million' in decimal)
+
+   That's all nonstandard (reading binary as if it were decimal) so don't learn that. ;)
