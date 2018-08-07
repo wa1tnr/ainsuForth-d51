@@ -211,9 +211,23 @@ void say_a_tick(void) {
 }
 
 void _ch_delay(void) {
-    for(int i=2; i>0; i--) {
-        uSec();
-    }
+    // for(int i=2; i>0; i--) {
+
+// 4 was good:
+    // for(volatile int i=1; i>0; i--) {
+
+        // uSec(); uSec(); uSec(); uSec(); uSec(); // quite good - entire row
+
+        // uSec(); uSec(); uSec(); uSec(); // many 1's mixed in with the 5's
+        //  uSec(); uSec(); uSec(); // also many 1's
+
+        // uSec(); uSec(); // VERY RELIABLE
+
+        // uSec(); // SEEMS FINE
+        for (volatile int i = 1; i < 2; i++) {
+        }
+
+    //}
 }
 
 bool tick_changed(void) {
@@ -305,7 +319,8 @@ void send_five(void) {
     tx_to_vcc();
     // very long time between typed ' ' characters:
 
-    for (int j =  3899; j > 0; j--) { hold_for_tick_change(); }
+    // for (int j =  7899; j > 0; j--) { hold_for_tick_change(); }
+    for (int j =  11; j > 0; j--) { hold_for_tick_change(); }
     pulse_D11(); // scope trigger
     for (int j =   2; j > 0; j--) { hold_for_tick_change(); }
 
@@ -324,10 +339,6 @@ void send_five(void) {
           hold_for_tick_change();
           hold_for_tick_change();
 
-//          _one_gap();
-//          hold_for_tick_change();
-//          hold_for_tick_change();
-
             _one_pulse();
             hold_for_tick_change();
             hold_for_tick_change();
@@ -341,7 +352,7 @@ void send_five(void) {
 
 
 
-        } //   if (i ==  4) { _one_pulse(); }
+        }
 
         if (i ==  0) { _one_pulse(); }
         hold_for_tick_change();
@@ -349,11 +360,6 @@ void send_five(void) {
     _one_gap();
     hold_for_tick_change();
     tx_to_vcc();
-
-    // very long time between typed 'U' characters:
-    // for (int j =  7899; j > 0; j--) { hold_for_tick_change(); }
-    // pulse_D11(); // scope trigger
-    // for (int j =  7899; j > 0; j--) { hold_for_tick_change(); }
 }
 
 
@@ -361,7 +367,7 @@ void send_right_curly_brace(void) {
     tx_to_vcc();
     // very long time between typed ' ' characters:
 
-    for (int j =  3899; j > 0; j--) { hold_for_tick_change(); }
+    for (int j =  7899; j > 0; j--) { hold_for_tick_change(); }
     pulse_D11(); // scope trigger
     for (int j =   2; j > 0; j--) { hold_for_tick_change(); }
 
@@ -404,7 +410,7 @@ void send_m_m_m(void) {
     tx_to_vcc();
     // very long time between typed ' ' characters:
 
-    for (int j =  3899; j > 0; j--) { hold_for_tick_change(); }
+    for (int j =  7899; j > 0; j--) { hold_for_tick_change(); }
     pulse_D11(); // scope trigger
     for (int j =   2; j > 0; j--) { hold_for_tick_change(); }
 
@@ -440,11 +446,10 @@ void send_m_m_m(void) {
 
 
 void send_UUUU(void) {
-    // send_uuu();
     tx_to_vcc();
     // very long time between typed 'U' characters:
 
-    for (int j =  3899; j > 0; j--) { hold_for_tick_change(); }
+    for (int j =  7899; j > 0; j--) { hold_for_tick_change(); }
     pulse_D11(); // scope trigger
     for (int j =   2; j > 0; j--) { hold_for_tick_change(); }
 
@@ -469,35 +474,26 @@ void send_UUUU(void) {
     _one_gap();
     hold_for_tick_change();
     tx_to_vcc();
-
-    // very long time between typed 'U' characters:
-    // for (int j =  7899; j > 0; j--) { hold_for_tick_change(); }
-    // pulse_D11(); // scope trigger
-    // for (int j =  7899; j > 0; j--) { hold_for_tick_change(); }
 }
-
-
 
 
 
 void nooop(void) {
 }
 
+
 void nmain(void) {
 
+    // while(1) {
 
-    while(1) {
+    for (int i=555555; i>0; i--) {
+        // send_m_m_m(); // send_mmmm    lower-case em
+        // send_UUUU();
         send_five(); //  5555
+    }
+
         // send_right_curly_brace();
         // send_m_m_m(); // send_mmmm    lower-case em
-
-#define ISNT_COMMENTED_OUT
-#undef  ISNT_COMMENTED_OUT
-#ifndef ISNT_COMMENTED_OUT
-        // ---- closed, stanza
-#endif // #ifndef ISNT_COMMENTED_OUT
-
-    } // while
 
 
 
