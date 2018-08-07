@@ -317,14 +317,9 @@ void send_uuu(void) {
 
 void send_five(void) {
     tx_to_vcc();
-    // very long time between typed ' ' characters:
-
-    // for (int j =  7899; j > 0; j--) { hold_for_tick_change(); }
     for (int j =  11; j > 0; j--) { hold_for_tick_change(); }
     pulse_D11(); // scope trigger
     for (int j =   2; j > 0; j--) { hold_for_tick_change(); }
-
-    // ---- new stanza
 
     tx_to_vcc();
     hold_for_tick_change();
@@ -347,13 +342,7 @@ void send_five(void) {
             hold_for_tick_change();
             hold_for_tick_change();
              _one_pulse();
-
-
-
-
-
         }
-
         if (i ==  0) { _one_pulse(); }
         hold_for_tick_change();
     }
@@ -447,13 +436,10 @@ void send_m_m_m(void) {
 
 void send_UUUU(void) {
     tx_to_vcc();
-    // very long time between typed 'U' characters:
 
-    for (int j =  7899; j > 0; j--) { hold_for_tick_change(); }
+    for (int j =  11; j > 0; j--) { hold_for_tick_change(); }
     pulse_D11(); // scope trigger
     for (int j =   2; j > 0; j--) { hold_for_tick_change(); }
-
-    // ---- new stanza
 
     tx_to_vcc();
     hold_for_tick_change();
@@ -477,7 +463,6 @@ void send_UUUU(void) {
 }
 
 
-
 void nooop(void) {
 }
 
@@ -487,13 +472,15 @@ void nmain(void) {
     // while(1) {
 
     for (int i=555555; i>0; i--) {
-        // send_m_m_m(); // send_mmmm    lower-case em
-        // send_UUUU();
-        send_five(); //  5555
+        // send_five(); //  5555
+        /// send_m_m_m(); // send_mmmm    lower-case em
+        send_UUUU();
+        // send_uuu();
     }
 
         // send_right_curly_brace();
         // send_m_m_m(); // send_mmmm    lower-case em
+// void send_uuu(void) {
 
 
 
