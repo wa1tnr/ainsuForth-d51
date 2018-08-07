@@ -228,6 +228,15 @@ void hold_for_tick_change(void) {
 }
 
 
+// ///////////////////////////////////
+// ///////////////////////////////////
+// ///////////////////////////////////
+
+
+// ///////////////////////////////////
+// ///////////////////////////////////
+// ///////////////////////////////////
+
 void _one_gap(void) {
     tx_to_vcc();
 }
@@ -245,6 +254,16 @@ void _one_pulse(void) {
     hold_for_tick_change();
 }
 
+void _gap_then_pulse(void) {
+    _one_gap();
+    _one_pulse();
+}
+
+void _gap_pulse_twice_iter(void) {
+    for (int i = 2; i>0; i--) {
+        _gap_then_pulse();
+    }
+}
 
 
 void send_uuu(void) {
