@@ -76,6 +76,7 @@ hal/utils/src/utils_event.o \
 hal/src/hal_sleep.o \
 atmel_start.o \
 hal/src/hal_atomic.o \
+fstack.o \
 main.o
 
 
@@ -110,6 +111,7 @@ OBJS_AS_ARGS +=  \
 "hal/src/hal_sleep.o" \
 "atmel_start.o" \
 "hal/src/hal_atomic.o" \
+"fstack.o" \
 "main.o"
 
 # List the dependency files
@@ -147,6 +149,7 @@ DEPS_AS_ARGS +=  \
 "hal/src/hal_atomic.d" \
 "hpl/oscctrl/hpl_oscctrl.d" \
 "atmel_start.d" \
+"fstack.o" \
 "main.d"
 
 OUTPUT_FILE_NAME :=AtmelStart
