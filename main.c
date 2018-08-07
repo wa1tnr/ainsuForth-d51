@@ -272,6 +272,48 @@ void send_uuu(void) {
     for (int j = 14899; j > 0; j--) { hold_for_tick_change(); }
 }
 
+
+void send_UUUU(void) {
+    // send_uuu();
+    tx_to_vcc();
+    // very long time between typed 'U' characters:
+
+    for (int j =  3899; j > 0; j--) { hold_for_tick_change(); }
+    pulse_D11(); // scope trigger
+    for (int j =   2; j > 0; j--) { hold_for_tick_change(); }
+
+    // ---- new stanza
+
+    tx_to_vcc();
+    hold_for_tick_change();
+    _one_gap();
+    for (int i =  9; i > -1 ; i--) {
+        if (i ==  9) { _one_gap();   }
+        if (i ==  8) { _one_pulse(); }
+        if (i ==  7) { _one_gap();   }
+        if (i ==  6) { _one_pulse(); }
+        if (i ==  5) { _one_gap();   }
+        if (i ==  4) { _one_pulse(); } 
+        if (i ==  3) { _one_gap();   }
+        if (i ==  2) { _one_pulse(); }
+        if (i ==  1) { _one_gap();   }
+        if (i ==  0) { _one_pulse(); }
+        hold_for_tick_change();
+    }
+    _one_gap();
+    hold_for_tick_change();
+    tx_to_vcc();
+
+    // very long time between typed 'U' characters:
+    // for (int j =  7899; j > 0; j--) { hold_for_tick_change(); }
+    // pulse_D11(); // scope trigger
+    // for (int j =  7899; j > 0; j--) { hold_for_tick_change(); }
+}
+
+
+
+
+
 void nooop(void) {
 }
 
@@ -279,6 +321,11 @@ void nmain(void) {
 
 
     while(1) {
+        send_UUUU(); // capital UUUU
+
+#define ISNT_COMMENTED_OUT
+#undef  ISNT_COMMENTED_OUT
+#ifndef ISNT_COMMENTED_OUT
         // send_uuu();
         tx_to_vcc();
 
@@ -314,9 +361,14 @@ void nmain(void) {
         // pulse_D11(); // scope trigger
         // for (int j =  7899; j > 0; j--) { hold_for_tick_change(); }
 
-
         // ---- closed, stanza
-    }
+#endif // #ifndef ISNT_COMMENTED_OUT
+
+    } // while
+
+
+
+
 
 
 
@@ -367,7 +419,8 @@ int main(void) {
     // 1448 had few errors but enough to want to pursue
 // ###bookmark
     //  1368 1368 1368  -- thirteen sixty eight had NO ERRORS in very long runs.
-    tick_rate = 1368;  // it's a delay, a lower value means a shorter delay
+    // tick_rate = 1368;  // it's a delay, a lower value means a shorter delay
+    tick_rate = 1358;  // it's a delay, a lower value means a shorter delay
     push(tick_rate);
     // SysTick_Config(1420); // 19200 baud has    52   uSec pulses
     SysTick_Config(tick_rate); // 19200 baud has    52   uSec pulses
