@@ -14,9 +14,10 @@ int tick_h  = -1; // true
 int tick_ch = -1; // true
 int tick_r, tick_c = -1;
 
-void pins_setup(void) {
 // void push(int n);
 // int pop(void);
+
+void pins_setup(void) {
     int pins_state = 1901; // arbitrary
     push(pins_state);
 
@@ -200,23 +201,8 @@ void say_a_tick(void) {
 }
 
 void _ch_delay(void) {
-    // for(int i=2; i>0; i--) {
-
-// 4 was good:
-    // for(volatile int i=1; i>0; i--) {
-
-        // uSec(); uSec(); uSec(); uSec(); uSec(); // quite good - entire row
-
-        // uSec(); uSec(); uSec(); uSec(); // many 1's mixed in with the 5's
-        //  uSec(); uSec(); uSec(); // also many 1's
-
-        // uSec(); uSec(); // VERY RELIABLE
-
-        // uSec(); // SEEMS FINE
-        for (volatile int i = 1; i < 2; i++) {
-        }
-
-    //}
+    for (volatile int i = 1; i < 2; i++) {
+    }
 }
 
 bool tick_changed(void) {
@@ -239,14 +225,6 @@ void hold_for_tick_change(void) {
     }
 }
 
-
-// ///////////////////////////////////
-// ///////////////////////////////////
-// ///////////////////////////////////
-
-
-// ///////////////////////////////////
-// ///////////////////////////////////
 // ///////////////////////////////////
 
 void _one_gap(void) {
@@ -276,7 +254,6 @@ void _gap_pulse_twice_iter(void) {
         _gap_then_pulse();
     }
 }
-
 
 void send_uuu(void) {
     tx_to_vcc();
@@ -347,13 +324,10 @@ void send_five(void) {
 
 void send_right_curly_brace(void) {
     tx_to_vcc();
-    // very long time between typed ' ' characters:
 
     for (int j =  11; j > 0; j--) { hold_for_tick_change(); }
     pulse_D11(); // scope trigger
     for (int j =   2; j > 0; j--) { hold_for_tick_change(); }
-
-    // ---- new stanza
 
     tx_to_vcc();
     hold_for_tick_change();
@@ -366,11 +340,9 @@ void send_right_curly_brace(void) {
         if (i ==  6) { _one_pulse(); }
         if (i ==  5) { _one_pulse(); }
         if (i ==  4) { _one_gap(); 
-        hold_for_tick_change();
-        hold_for_tick_change();
-
-
-  } //     if (i ==  4) { _one_pulse(); }
+            hold_for_tick_change();
+            hold_for_tick_change();
+        }
         if (i ==  3) { _one_pulse(); }
         if (i ==  2) { _one_pulse(); }
         if (i ==  1) { _one_gap();   }
@@ -453,10 +425,6 @@ void nmain(void) {
         // send_uuu();
     }
 
-
-    while(1) { // ---------- trapped -------------
-    }
-
     raise_LED_pins();
     while (1) {
         flicker_LED();
@@ -466,7 +434,6 @@ void nmain(void) {
 
 int main(void) {
     SystemInit();
-    // init_act_LED();
     pins_setup();
     PORT->Group[0].DIRSET.reg  = (uint32_t)(1 << 21); // PA21 //  1 11 pinmode  // D11
     clock_init();
