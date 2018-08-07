@@ -1,3 +1,6 @@
+// Tue Aug  7 06:43:03 UTC 2018
+// has right curly brace
+
 // Tue Aug  7 05:54:23 UTC 2018
 // has mmmm
 
@@ -295,6 +298,49 @@ void send_uuu(void) {
 }
 
 
+void send_right_curly_brace(void) {
+    tx_to_vcc();
+    // very long time between typed ' ' characters:
+
+    for (int j =  3899; j > 0; j--) { hold_for_tick_change(); }
+    pulse_D11(); // scope trigger
+    for (int j =   2; j > 0; j--) { hold_for_tick_change(); }
+
+    // ---- new stanza
+
+    tx_to_vcc();
+    hold_for_tick_change();
+    _one_gap();
+    for (int i =  9; i > -1 ; i--) {
+        if (i ==  9) { _one_gap();   }
+        if (i ==  8) { _one_pulse(); }
+        if (i ==  7) { _one_gap();   }
+
+        if (i ==  6) { _one_pulse(); }
+        if (i ==  5) { _one_pulse(); }
+        if (i ==  4) { _one_gap(); 
+        hold_for_tick_change();
+        hold_for_tick_change();
+
+
+  } //     if (i ==  4) { _one_pulse(); }
+        if (i ==  3) { _one_pulse(); }
+        if (i ==  2) { _one_pulse(); }
+        if (i ==  1) { _one_gap();   }
+        if (i ==  0) { _one_pulse(); }
+        hold_for_tick_change();
+    }
+    _one_gap();
+    hold_for_tick_change();
+    tx_to_vcc();
+
+    // very long time between typed 'U' characters:
+    // for (int j =  7899; j > 0; j--) { hold_for_tick_change(); }
+    // pulse_D11(); // scope trigger
+    // for (int j =  7899; j > 0; j--) { hold_for_tick_change(); }
+}
+
+
 void send_m_m_m(void) {
     tx_to_vcc();
     // very long time between typed ' ' characters:
@@ -382,7 +428,8 @@ void nmain(void) {
 
 
     while(1) {
-        send_m_m_m(); // send_mmmm    lower-case em
+        send_right_curly_brace();
+        // send_m_m_m(); // send_mmmm    lower-case em
 
 #define ISNT_COMMENTED_OUT
 #undef  ISNT_COMMENTED_OUT
