@@ -1,3 +1,6 @@
+// Tue Aug  7 01:17:10 UTC 2018
+// last good
+
 // Mon Aug  6 06:11:27 UTC 2018
 
 // Working serial program - sends a string of UUUUUU to the
@@ -7,12 +10,17 @@
 
 #include "atmel_start.h"
 #include "gpio_local.h"
+#include "fstack.h" // forth-like interpreter, stack ops
 
 int tick_h  = -1; // true
 int tick_ch = -1; // true
 int tick_r, tick_c = -1;
 
 void pins_setup(void) {
+// void push(int n);
+// int pop(void);
+    int pins_state = 1901; // arbitrary
+    push(pins_state);
 
     // serial pins
     //    input
@@ -21,25 +29,33 @@ void pins_setup(void) {
     PORT->Group[1].DIRSET.reg = (uint32_t)(1 << 16); // tx output   // PB16
 
     // gpio outputs
-    PORT->Group[0].DIRSET.reg |= (uint32_t)(1 << 18); // PA18 //  1 18 pinmode  // D6
-    PORT->Group[0].DIRSET.reg |= (uint32_t)(1 << 23); // PA23 //  1 23 pinmode  // D13
+    PORT->Group[0].DIRSET.reg |= (uint32_t)(1 << 18); // PA18 //  1  6 pinmode  // D6
+    PORT->Group[0].DIRSET.reg |= (uint32_t)(1 << 23); // PA23 //  1 13 pinmode  // D13
+    PORT->Group[0].DIRSET.reg  = (uint32_t)(1 << 21); // PA21 //  1 11 pinmode  // D11
 
     // gpio raise pin to 3.3v
-    PORT->Group[0].OUTSET.reg |= (uint32_t)(1 << 18); // PA18 //  1 18 pinwrite
-    PORT->Group[0].OUTSET.reg |= (uint32_t)(1 << 23); // PA23 //  1 23 pinwrite
+    PORT->Group[0].OUTSET.reg |= (uint32_t)(1 << 18); // PA18 //  1  6 pinwrite // D6
+    PORT->Group[0].OUTSET.reg |= (uint32_t)(1 << 21); // PA21 //  1 11 pinwrite // D11
+    PORT->Group[0].OUTSET.reg |= (uint32_t)(1 << 23); // PA23 //  1 13 pinwrite // D13
 
     // gpio lower pin to Ground
-    PORT->Group[0].OUTCLR.reg =  (uint32_t)(1 << 18); // PA18 //  0 18 pinwrite
-    PORT->Group[0].OUTCLR.reg =  (uint32_t)(1 << 23); // PA23 //  0 23 pinwrite
+    PORT->Group[0].OUTCLR.reg =  (uint32_t)(1 << 18); // PA18 //  0  6 pinwrite // D6
+    PORT->Group[0].OUTCLR.reg |= (uint32_t)(1 << 21); // PA21 //  0 11 pinwrite // D11
+    PORT->Group[0].OUTCLR.reg =  (uint32_t)(1 << 23); // PA23 //  0 13 pinwrite // D13
 
+#undef PIN_D11_INPUT
+#ifdef PIN_D11_INPUT
     // gpio input pins
-    PORT->Group[0].DIRCLR.reg  = (uint32_t)(1 << 21); // PA21 //  0 21 pinmode  // D11
+    PORT->Group[0].DIRCLR.reg  = (uint32_t)(1 << 21); // PA21 //  0 11 pinmode  // D11
+#endif // #ifdef PIN_D11_INPUT
 
     // gpio output pin toggles
-    PORT->Group[0].OUTTGL.reg = (uint32_t)(1 << 18); // D6 toggle
-    PORT->Group[0].OUTTGL.reg = (uint32_t)(1 << 23); // D13 toggle
+    PORT->Group[0].OUTTGL.reg = (uint32_t)(1 << 18); // PA18 //  D6 toggle
+    PORT->Group[0].OUTTGL.reg = (uint32_t)(1 << 21); // PA21 // D11 toggle
+    PORT->Group[0].OUTTGL.reg = (uint32_t)(1 << 23); // PA23 // D13 toggle
+    // Group[1] means PORTB rather than PORTA (which is Group[0])
+    PORT->Group[1].OUTTGL.reg = (uint32_t)(1 <<  3); // PB03 //  D8 toggle  // NEOPIX
 }
-
 
 
 void uSec(void) {
@@ -56,6 +72,22 @@ void short_timer(void) { // human blinkie timescale
             uSec();
         }
     }
+}
+
+void raise_D11(void) { // scope trigger
+    PORT->Group[0].OUTSET.reg |= (uint32_t)(1 << 21); // PA21 //  1 11 pinwrite // D11
+}
+
+void lower_D11(void) { // ground it
+    PORT->Group[0].OUTCLR.reg |= (uint32_t)(1 << 21); // PA21 //  0 11 pinwrite // D11
+}
+
+void pulse_D11(void) {
+    lower_D11();
+    for (int i=11; i>0; i--) {
+        uSec();
+    }
+    raise_D11(); // negative logic
 }
 
 void raise_LED_pins(void) {
@@ -247,11 +279,13 @@ void nmain(void) {
 
 
     while(1) {
-        send_uuu();
+        // send_uuu();
         tx_to_vcc();
 
         // very long time between typed 'U' characters:
-        for (int j = 14799; j > 0; j--) { hold_for_tick_change(); }
+        for (int j =  3899; j > 0; j--) { hold_for_tick_change(); }
+        pulse_D11(); // scope trigger
+        for (int j =   2; j > 0; j--) { hold_for_tick_change(); }
 
         // ---- new stanza
 
@@ -276,7 +310,9 @@ void nmain(void) {
         tx_to_vcc();
 
         // very long time between typed 'U' characters:
-        for (int j = 14899; j > 0; j--) { hold_for_tick_change(); }
+        // for (int j =  7899; j > 0; j--) { hold_for_tick_change(); }
+        // pulse_D11(); // scope trigger
+        // for (int j =  7899; j > 0; j--) { hold_for_tick_change(); }
 
 
         // ---- closed, stanza
@@ -302,6 +338,7 @@ int main(void) {
     SystemInit();
     // init_act_LED();
     pins_setup();
+    PORT->Group[0].DIRSET.reg  = (uint32_t)(1 << 21); // PA21 //  1 11 pinmode  // D11
     clock_init();
     // SysTick_Config(5500); // 19200 baud has    52   uSec pulses
 
@@ -316,7 +353,24 @@ int main(void) {
 
     // 1330 is a bit too hot -- slow it a bit
     // SysTick_Config(1330); // 19200 baud has    52   uSec pulses
-    SysTick_Config(1420); // 19200 baud has    52   uSec pulses
+    int tick_rate = 1390; // 1390 is very fast for 38400
+    // tick_rate = 710;
+    // tick_rate = 355;
+    // tick_rate = 1420;
+
+
+    // tick_rate = 1400;  // it's a delay, a lower value means a shorter delay
+    // tick_rate = 1500;  // it's a delay, a lower value means a shorter delay
+    // 1400 may be too fast but 1500 is too slow and produces a nice 'j' once in a while
+    // 1470 gave an occasional U and a Capital O once in a while
+    // 1440 generates the usual close but not perfect pattern
+    // 1448 had few errors but enough to want to pursue
+// ###bookmark
+    //  1368 1368 1368  -- thirteen sixty eight had NO ERRORS in very long runs.
+    tick_rate = 1368;  // it's a delay, a lower value means a shorter delay
+    push(tick_rate);
+    // SysTick_Config(1420); // 19200 baud has    52   uSec pulses
+    SysTick_Config(tick_rate); // 19200 baud has    52   uSec pulses
 
     nmain();
     while (1) {
