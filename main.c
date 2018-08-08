@@ -418,8 +418,8 @@ void nmain(void) {
         
         // The first one wins - not sure what happens with the second function:
 
-        send_UUUU();
         send_five(); //  5555 not nearly as fast as sending UUUU
+        send_UUUU();
 
         // send_m_m_m(); // send_mmmm    lower-case em
         // send_uuu();
