@@ -27,13 +27,16 @@
 #define GPIO_PIN_FUNCTION_M 12
 #define GPIO_PIN_FUNCTION_N 13
 
-#define D4 GPIO(GPIO_PORTA, 14)
+#define D4   GPIO(GPIO_PORTA, 14) // alias PA14
+#define PA14 GPIO(GPIO_PORTA, 14) // alias D4
+
 #define PA16 GPIO(GPIO_PORTA, 16) // on foreign target Metro M4 Express this is D13 - we are Feather M4 Express
 
 #define D6   GPIO(GPIO_PORTA, 18) // alias PA18
 #define PA18 GPIO(GPIO_PORTA, 18) // alias D6
 
-#define D9   GPIO(GPIO_PORTA, 19)
+#define D9   GPIO(GPIO_PORTA, 19) // alias PA19
+#define PA19 GPIO(GPIO_PORTA, 19) // alias D9
 
 #define D11  GPIO(GPIO_PORTA, 21) // alias PA21
 #define PA21 GPIO(GPIO_PORTA, 21) // alias D11
@@ -41,8 +44,10 @@
 #define D13  GPIO(GPIO_PORTA, 23) // alias PA23
 #define PA23 GPIO(GPIO_PORTA, 23) // alias D13
 
-#define PB03 GPIO(GPIO_PORTB, 3)
-#define PB16 GPIO(GPIO_PORTB, 16)
-#define PB17 GPIO(GPIO_PORTB, 17)
+#define PB03 GPIO(GPIO_PORTB, 3)  // alias D8   NEOPIX
+#define D8   GPIO(GPIO_PORTB, 3)  // alias PB03
+
+#define PB16 GPIO(GPIO_PORTB, 16) // TX - digital OUTPUT
+#define PB17 GPIO(GPIO_PORTB, 17) // RX - digital INPUT w/pullup
 
 #endif // ATMEL_START_PINS_H_INCLUDED
