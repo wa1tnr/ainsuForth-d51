@@ -54,7 +54,8 @@ void ClockInit120(void)
 
 
 // the selected DPLL ratio:
-#define      OSC_RATIO_AINSU 3661
+#define      OSC_RATIO_AINSU 3661 // 20 MHz
+#define      OSC_RATIO_AINSU 2746 // 15 MHz like Arduino?
 
         // try 1220 - 6.66 MHz on D11 and 40 MHz D4
         // try 1830 - 10.0 MHz on D11 
@@ -116,8 +117,25 @@ int main(void) {
 
     while (1) {
         // do something
+        // this test can be repeated in an arduino program,
+        // to compare empty loops between platforms and clock setups,
+        // possibly (may not be a valid approach):
+
         PORT->Group[0].OUTTGL.reg = (uint32_t)(1 << 21); // PA21 // D11 toggle
+        // shows 20 MHz on D11 GPIO
+
         // confidence builder only -- omit this line:
         // led_stuph();
     }
 }
+
+/*
+        // pin setup - Feather M4 Express, D11 (PA21) GPIO in OUTPUT mode:
+        PORT->Group[0].DIRSET.reg  = (uint32_t)(1 << 21); // PA21 //  1 11 pinmode  // D11
+
+        // pin toggle - PA21
+        PORT->Group[0].OUTTGL.reg = (uint32_t)(1 << 21); // PA21 // D11 toggle
+
+*/
+
+
