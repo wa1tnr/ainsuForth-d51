@@ -1,15 +1,25 @@
+// Thu Aug  9 18:34:58 UTC 2018
+
 #include "atmel_start.h"
-#include "gpio_local.h"
 
-// both pins 20 MHz measured.  D4 signal very weak though.
+// raw version -- omits are commented, to improve performance characteristics
 
-// #include "driver_init.h"
-// #include "driver_examples.h"
-// #include "clock_init.h"
+// see the cooked version for confidence building (LED blinkie version)
+
+#define SCALED 8000 // D13 toggle rate scaler - too fast for human eye otherwise
+
+int tick_h = -1;
+
 
 // https://www.avrfreaks.net/forum/resolved-samd51-asf4start-clock-fail-debugger-hang
 
-void ClockInit(void)
+void pins_setup(void) {
+    PORT->Group[0].DIRSET.reg  = (uint32_t)(1 << 21); // PA21 //  1 11 pinmode  // D11
+    PORT->Group[0].DIRSET.reg  = (uint32_t)(1 << 23); // PA23 //  1 13 pinmode  // D13
+    // toggle: // PORT->Group[0].OUTTGL.reg = (uint32_t)(1 << 21); // PA21 // D11 toggle
+}
+
+void ClockInit120(void)
 {
 	// CONFIGURE FLASH MEMORY WAIT STATES
 	//NVMCTRL->CTRLA.bit.RWS = 5; // 4WS allows up to 119 MHz, 5WS allows 120 MHz
@@ -32,7 +42,24 @@ void ClockInit(void)
 
 	// CONFIGURE PLL0
 	OSCCTRL->Dpll[0].DPLLCTRLB.bit.REFCLK = 1; // use OSC32K as the PLL reference clock
-	OSCCTRL->Dpll[0].DPLLRATIO.reg = (3<<16) + 3661; // multiply OSC32K by 3662.11 to get 120 MHz (actual multiplier is LDR + 1 + LDRFRAC/32)
+	// OSCCTRL->Dpll[0].DPLLRATIO.reg = (3<<16) + 3661; // multiply OSC32K by 3662.11 to get 120 MHz (actual multiplier is LDR + 1 + LDRFRAC/32)
+
+
+#define      OMIT_THESE_ALTERNATES
+#ifndef      OMIT_THESE_ALTERNATES
+    #define  OSC_RATIO_AINSU 1220
+    #define  OSC_RATIO_AINSU 1830
+    #define  OSC_RATIO_AINSU 3661
+#endif // #ifndef OMIT_THESE_ALTERNATES
+
+
+// the selected DPLL ratio:
+#define      OSC_RATIO_AINSU 3661
+
+        // try 1220 - 6.66 MHz on D11 and 40 MHz D4
+        // try 1830 - 10.0 MHz on D11 
+        // try 3661 - 20.0 MHz on D11 .. said to be a 120 MHz GCLK 0
+	OSCCTRL->Dpll[0].DPLLRATIO.reg = (3<<16) + OSC_RATIO_AINSU ; // multiply OSC32K by 3662.11 to get 120 MHz (actual multiplier is LDR + 1 + LDRFRAC/32)
 
 	// errata: When using a low-frequency input clock on FDPLLn, several FDPLL unlocks may occur while the output
 	// frequency is stable. Workaround: when using a low-frequency input clock on FDPLLn, enable the lock bypass
@@ -51,178 +78,46 @@ void ClockInit(void)
 	// do peripheral clock initialization here...
 }
 
+void setup_PA14_as_GCLK_IO(void) {
 
-void pins_setup(void) {
-    PORT->Group[0].DIRSET.reg  = (uint32_t)(1 << 21); // PA21 //  1 11 pinmode  // D11
-    // PORT->Group[0].DIRSET.reg  = (uint32_t)(1 << 14);
-    // toggle: // PORT->Group[0].OUTTGL.reg = (uint32_t)(1 << 21); // PA21 // D11 toggle
+    // configure PA14 (board D4) as GCLK_IO[0] output of main clock generator,
+    // to confirm 120 MHz operation
+    PORT->Group[GPIO_PORTA].DIRSET.reg = (1 << 14); // set pin as output
+    PORT->Group[GPIO_PORTA].PINCFG[14].bit.PMUXEN = 1; // enable the peripheral mux for this pin
+    PORT->Group[GPIO_PORTA].PMUX[(14>>1)].bit.PMUXE = MUX_PA14M_GCLK_IO0; // select the GCLK_IO0 peripheral function
+    GCLK->GENCTRL[0].bit.OE = 1; // enable output from clock generator 0
 }
 
 
-int main(void)
-{
-    pins_setup();
-	ClockInit();
-
-	// configure PA21 (board D11) as GCLK_IO[0] output of main clock generator, to confirm 120 MHz operation
-	PORT->Group[GPIO_PORTA].DIRSET.reg = (1 << 14); // set pin as output
-	PORT->Group[GPIO_PORTA].PINCFG[14].bit.PMUXEN = 1; // enable the peripheral mux for this pin
-	PORT->Group[GPIO_PORTA].PMUX[(14>>1)].bit.PMUXE = MUX_PA14M_GCLK_IO0; // select the GCLK_IO0 peripheral function
-	GCLK->GENCTRL[0].bit.OE = 1; // enable output from clock generator 0
-
-/*
- 175 #define PIN_PA14M_GCLK_IO0             _L_(14) // < \brief GCLK signal: IO0 on PA14 mux M 
- 176 #define MUX_PA14M_GCLK_IO0             _L_(12)
- 177 
- 178 
- 179 #define PINMUX_PA14M_GCLK_IO0      ((PIN_PA14M_GCLK_IO0 << 16) | MUX_PA14M_GCLK_IO0)
- 180 #define PORT_PA14M_GCLK_IO0    (_UL_(1) << 14)
- 181 #define PIN_PB22M_GCLK_IO0 
-*/
-
-/*
-	// configure PB14 (board D5)  as GCLK_IO[0] output of main clock generator, to confirm 120 MHz operation
-	PORT->Group[GPIO_PORTB].DIRSET.reg = (1 << 14); // set pin as output
-	PORT->Group[GPIO_PORTB].PINCFG[14].bit.PMUXEN = 1; // enable the peripheral mux for this pin
-	PORT->Group[GPIO_PORTB].PMUX[(14>>1)].bit.PMUXE = MUX_PB14M_GCLK_IO0; // select the GCLK_IO0 peripheral function
-	GCLK->GENCTRL[0].bit.OE = 1; // enable output from clock generator 0
-*/
+// for confidence -- omit in working program:
+// void SysTick_Handler(void){
+//  tick_h++ ;
+// }
+// omit the above three lines
 
 
-	while (1)
-	{
-		// do something
-            PORT->Group[0].OUTTGL.reg = (uint32_t)(1 << 21); // PA21 // D11 toggle
-	}
-}
-
-/*  ********************** */
-/*  ********************** */
-/*  ********************** */
-/*  ********************** */
-/*  ********************** */
-/*  ********************** */
-/*  ********************** */
-/*  ********************** */
-
-void uSec(void) {
-    for (volatile int i = 1; i < 2; i++) { // needs calibration
-        // nothing
+void led_stuph(void) {
+    if (tick_h > SCALED) {
+        PORT->Group[0].OUTTGL.reg = (uint32_t)(1 << 23); // PA23 // D13 toggle
+        tick_h = -1;
     }
 }
 
-void short_timer(void) { // human blinkie timescale
-    uint32_t on_time  = 2140111222; // it's 2147 something ;)
-    for(int j = 2; j>0; j--) {
-        for(on_time =       214011; on_time > 0; on_time--) { // 21.4 million
-            uSec();
-        }
-    }
-}
-
-void raise_LED_pins(void) { // multiple target boards
-    raise_D13_feather(); // Feather M4 Express
-}
-
-void lower_LED_pins(void) {
-    lower_D13_feather();
-}
-
-void blink_LED(void) {
-    raise_LED_pins();
-    short_timer();
-    lower_LED_pins();
-    short_timer();
-}
-
-void flicker_LED(void) {
-    raise_LED_pins();
-    short_timer();
-    lower_LED_pins();
-    short_timer();
-}
-
-void blinkLEDfast(void) {
-    for(int i = 15; i > 0; i--) {
-        blink_LED();
-    }
-}
-
-void activity_LED_demo(void) {
-    blinkLEDfast();
-}
-
-void long_long_timer(void) {
-    for (int j=4; j>1; j--){
-        for (int i=3; i>1; i--){
-            short_timer();
-        }
-    }
-}
-
-void nmain(void) {
-        raise_LED_pins();
-        for (int i=4; i>0; i--) { // blink a while then go into 3.5 MHz loop on D11
-            flicker_LED();
-            short_timer();
-	}
-        // fall-thru back to main();
-}
-
-/*
-void TC1_Handler(void){ // fires rarely, for counting overflows of time-ticker
-    // TC1->COUNT32.INTFLAG.bit.OVF = 1; // to clear it
-    PORT->Group[0].OUTTGL.reg = (uint32_t)(1 << 21); // PA21 // D11 toggle
-}
-*/
-
-/*
-void SysTick_Handler(void){
-    PORT->Group[0].OUTTGL.reg = (uint32_t)(1 << 21); // PA21 // D11 toggle
-}
-*/
-
-/*
 int main(void) {
-
-//
     // Nice triple, 8 MHZ:
     SystemCoreClockUpdate();
     SystemInit();
-    pins_setup();
-//
+    pins_setup(); // D11 in OUTPUT mode
 
-    SystemCoreClockUpdate(); // might pull in 48 MHz
-    SystemInit(); // recent work used this rather than atmel_start_init()
-    pins_setup();
+    ClockInit120();
+    setup_PA14_as_GCLK_IO();
+    // omit:
+    // SysTick_Config(4000);
 
-    // TIMER_1_example();
-    // NVIC_EnableIRQ(TC1_IRQn);
-
-    // SysTick_Config(2); // 1.7 MHz on toggle D11
-
-    // nmain(); // has fall-thru now.
-
-    // atmel_start_init();
-    // system_init(); // driver_init.h
-
-
-
-    // sytem_init() seemed a possible trouble spot and wasn't used earlier today (heh)
-    // system_init(); // driver_init.c
-    // NVIC_EnableIRQ(TC1_IRQn);
-
-
-    // smaller SysTick means ticks come more rapidly
-    // SysTick_Config(4000000);
-    // init_act_LED();
-
-    // nmain(); // has fall-thru now.
-
-    // clock_init(); // very late in the game
     while (1) {
+        // do something
         PORT->Group[0].OUTTGL.reg = (uint32_t)(1 << 21); // PA21 // D11 toggle
-        // 3.5 MHz with no uSec loop
+        // confidence builder only -- omit this line:
+        // led_stuph();
     }
 }
-*/
