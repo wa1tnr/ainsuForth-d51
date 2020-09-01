@@ -1,0 +1,13 @@
+
+  commit 613b2cb450445d5d76fc390ce91a9f770342b98f
+  Author: wa1tnr <wa1tnr@users.noreply.github.com>
+  Date:   Fri Aug 10 08:19:56 2018 +0000
+
+     Working TX pin serial annunciator (talks to PiUART 38400 bps)
+
+  On branch: clockey-amrt-aa-8_AUG-e-
+
+  That's the working soft USART emulation from August 10th, 2018.
+
+  Finally documented in September of 2020. ;)
+Tue Sep  1 17:19:29 UTC 2020
